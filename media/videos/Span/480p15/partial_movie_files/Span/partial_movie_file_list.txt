@@ -1,0 +1,4 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/sonik/Manimations/media/videos/Span/480p15/partial_movie_files/Span/1185818338_906600422_862559207.mp4'
+file 'file:C:/Users/sonik/Manimations/media/videos/Span/480p15/partial_movie_files/Span/624642324_3803081570_4227536255.mp4'
+file 'file:C:/Users/sonik/Manimations/media/videos/Span/480p15/partial_movie_files/Span/624642324_4071659840_566201186.mp4'
