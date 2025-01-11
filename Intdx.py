@@ -4,20 +4,20 @@ class FTCp2(Scene):
     def construct(self):
         # Set up the axes
         axes = Axes(
-            x_range=[0, 6, 1],
-            y_range=[0, 6, 1],
-            x_length=6,
-            y_length=6,
+            x_range=[-1, 6, 1],
+            y_range=[-3, 6, 1],
+            x_length=7,
+            y_length=9,
             axis_config={"include_numbers": True},
-        ).to_edge(LEFT).scale(0.8)
+        ).to_edge(LEFT).scale(0.5)
 
         axes2 = Axes(
-            x_range=[0, 6, 1],
-            y_range=[0, 6, 1],
-            x_length=6,
-            y_length=6,
+            x_range=[-1, 6, 1],
+            y_range=[-3, 6, 1],
+            x_length=7,
+            y_length=9,
             axis_config={"include_numbers": True},
-        ).to_edge(RIGHT).scale(0.8)
+        ).to_edge(RIGHT).scale(0.5)
 
         # Define functions
         def f(t):
@@ -31,6 +31,7 @@ class FTCp2(Scene):
 
         # Value trackers
         x_value = ValueTracker(2)
+        dx_value = ValueTracker(0)
 
         # Dynamic mobjects
         dot = always_redraw(
@@ -42,16 +43,6 @@ class FTCp2(Scene):
         dot2 = always_redraw(
             lambda: Dot(color=YELLOW).move_to(
                 axes2.c2p(x_value.get_value(), F(x_value.get_value()))
-            )
-        )
-
-        tangent_line = always_redraw(
-            lambda: axes2.get_secant_slope_group(
-                graph=graph2,
-                x=x_value.get_value(),
-                dx=0.001,
-                secant_line_color=RED,
-                secant_line_length=3,
             )
         )
 

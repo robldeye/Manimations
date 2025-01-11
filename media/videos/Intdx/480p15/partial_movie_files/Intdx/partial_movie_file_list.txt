@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Intdx/480p15/partial_movie_files/Intdx/1185818338_724363841_223132457.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Intdx/480p15/partial_movie_files/Intdx/624642324_1780522492_951458115.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Intdx/480p15/partial_movie_files/Intdx/624642324_3247316702_682706927.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Intdx/480p15/partial_movie_files/Intdx/624642324_2268332985_960211862.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Intdx/480p15/partial_movie_files/Intdx/624642324_506814627_1603875408.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Intdx/480p15/partial_movie_files/Intdx/624642324_2268332985_759039349.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Intdx/480p15/partial_movie_files/Intdx/624642324_946258169_3149510568.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Intdx/480p15/partial_movie_files/Intdx/624642324_2268332985_1983699615.mp4'
