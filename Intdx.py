@@ -1,23 +1,24 @@
 from manim import *
 
-class FTCp2(Scene):
+class Intdx(MovingCameraScene):
     def construct(self):
+        self.camera.frame.save_state()
         # Set up the axes
         axes = Axes(
-            x_range=[-1, 6, 1],
-            y_range=[-3, 6, 1],
-            x_length=7,
-            y_length=9,
+            x_range=[0, 5, 1],
+            y_range=[0, 5, 1],
+            x_length=5,
+            y_length=5,
             axis_config={"include_numbers": True},
-        ).to_edge(LEFT).scale(0.5)
+        ).to_edge(LEFT).scale(0.8)
 
         axes2 = Axes(
-            x_range=[-1, 6, 1],
-            y_range=[-3, 6, 1],
-            x_length=7,
-            y_length=9,
+            x_range=[0, 5, 1],
+            y_range=[0, 5, 1],
+            x_length=5,
+            y_length=5,
             axis_config={"include_numbers": True},
-        ).to_edge(RIGHT).scale(0.5)
+        ).to_edge(RIGHT).scale(0.8)
 
         # Define functions
         def f(t):
@@ -34,6 +35,17 @@ class FTCp2(Scene):
         dx_value = ValueTracker(0)
 
         # Dynamic mobjects
+        dx_rectangle = always_redraw(
+            lambda: axes.get_riemann_rectangles(
+                graph,
+                x_range=[3, 3.5],
+                dx=0.5-dx_value.get_value(),
+                stroke_width=0,
+                color=GREEN,
+                show_signed_area=False,
+            )
+        )
+
         dot = always_redraw(
             lambda: Dot(color=YELLOW).move_to(
                 axes.c2p(x_value.get_value(), f(x_value.get_value()))
@@ -61,8 +73,6 @@ class FTCp2(Scene):
         )
 
         # Labels
-        #FTC_text = MarkupText("Fundamental Theorem of Calculus part II").to_edge(UP)
-        derivative_text = MathTex(r"\frac{d}{dx} \int_0^x f(t)dt = f(x)").to_edge(UP)
         f_label = always_redraw(
             lambda: MathTex(f"(x, {f(x_value.get_value()):.2f})", color=BLUE).next_to(dot, UR, buff=-0.2).scale(0.8)
         )
@@ -85,15 +95,15 @@ class FTCp2(Scene):
         self.play(FadeIn(integral_area, int_label_coord, a_label_coord))
         self.wait(1)
 
-        # Show dx rectangle and moving tangent
-        self.play(FadeIn(dot), FadeIn(f_label))
-        self.play(Create(tangent_line), FadeIn(dot2), FadeIn(slope_label))
+        # Animated mobjects
+        self.play(FadeIn(dot, f_label))
+        self.play(FadeIn(dot2, slope_label))
         self.wait(1)
 
         # Animate the increase of x_value
-        self.play(x_value.animate.set_value(4), run_time=4, rate_func=linear)
+        self.play(x_value.animate.set_value(3), run_time=3, rate_func=linear)
         self.wait(1)
-
-        # Show derivative result
-        self.play(Write(derivative_text))
-        self.wait(2)
+        self.play(self.camera.frame.animate.scale(0.5).move_to(dot))
+        self.play(FadeIn(dx_rectangle))
+        self.play(dx_value.animate.set_value(0.49), run_time=5, rate_func=linear)
+        self.wait(1)
