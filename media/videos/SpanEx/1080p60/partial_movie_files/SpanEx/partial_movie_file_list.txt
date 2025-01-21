@@ -1,0 +1,7 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/sonik/Manimations/media/videos/SpanEx/1080p60/partial_movie_files/SpanEx/3977891868_1381233578_3634014989.mp4'
+file 'file:C:/Users/sonik/Manimations/media/videos/SpanEx/1080p60/partial_movie_files/SpanEx/2852726489_1432596116_627297570.mp4'
+file 'file:C:/Users/sonik/Manimations/media/videos/SpanEx/1080p60/partial_movie_files/SpanEx/2852726489_1204810144_3557839268.mp4'
+file 'file:C:/Users/sonik/Manimations/media/videos/SpanEx/1080p60/partial_movie_files/SpanEx/2852726489_1125878446_647351249.mp4'
+file 'file:C:/Users/sonik/Manimations/media/videos/SpanEx/1080p60/partial_movie_files/SpanEx/2852726489_1721863708_3523271297.mp4'
+file 'file:C:/Users/sonik/Manimations/media/videos/SpanEx/1080p60/partial_movie_files/SpanEx/2852726489_4277570474_710095770.mp4'
