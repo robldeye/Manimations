@@ -41,7 +41,7 @@ class SpanEx(Scene):
         )
         vsum_label = MathTex(r"\mathbf{v}_1 + \mathbf{v}_2", color=PURPLE).next_to(vsum.get_center(), UL)
         x1v1_label = always_redraw(
-            lambda: MathTex(r"x_1 \mathbf{v}_1", color=GREEN).next_to(x1v1.get_center(), RIGHT)
+            lambda: MathTex(f"{x1.get_value():.2f}" r"\mathbf{v}_1", color=GREEN).next_to(x1v1.get_center(), RIGHT)
         )
         v2_def = MathTex(r"\mathbf{v}_2=\begin{bmatrix} -2 \\ 0.5 \end{bmatrix}", color=YELLOW).next_to(v1_def, DOWN)
         v2_label = always_redraw(
