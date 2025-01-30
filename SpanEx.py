@@ -17,6 +17,10 @@ class SpanEx(Scene):
         asum = Vector([4, 1], color=ORANGE)
         x1 = ValueTracker(1)
         x2 = ValueTracker(1)
+
+        def track_rand(mob):
+            mob.set_value(random(-2,2))
+
         x1a1 = always_redraw(
             lambda: Vector([2*x1.get_value(),2*x1.get_value()], color=GREEN)
         )
@@ -37,9 +41,9 @@ class SpanEx(Scene):
             lambda: MathTex(f"{x1.get_value():.2f}" r"\vec{a}_1", color=GREEN).next_to(x1a1.get_center(), UL)
         )
         x2a2_label = always_redraw(
-            lambda: MathTex(f"{x2.get_value():.2f}" r"\vec{a}_2", color=YELLOW).next_to(x2a2.get_center(), DOWN)
+            lambda: MathTex(f"{x2.get_value():.2f}" r"\vec{a}_2", color=YELLOW).next_to(x2a2.get_center(), UR)
         )
-        title = MathTex(r"\text{Some vectors in} \, \text{Span}(\{\vec{a}_1, \vec{a}_2\})").to_edge(UP).scale(1.25)
+        title = MathTex(r"\text{Some vectors in} \, \text{Span}(\{\vec{a}_1, \vec{a}_2\})").to_edge(UP)
 
 
 
@@ -62,7 +66,7 @@ class SpanEx(Scene):
         
         # Scaling v_1 and v_2 to obtain elements of their Span
         self.play(
-            FadeOut(a1, a1_label, a2, a2_label, asum),
+            FadeOut(a1, a1_label, a2, a2_label, asum_label),
             FadeIn(x1a1, x1a1_label, x2a2, x2a2_label)
         )
         self.wait()
@@ -80,7 +84,7 @@ class SpanEx(Scene):
         )
         self.wait()
 
-        # 2
+        # 1
         self.play(
             x1.animate.set_value(-1), 
             x2.animate.set_value(1),
@@ -88,12 +92,72 @@ class SpanEx(Scene):
             rate_func=smooth
         )
         self.add(
-            xasum.copy()
+            Vector([2* x1.get_value() + 2*x2.get_value(), 2*x1.get_value() + -1*x2.get_value()], color=ORANGE)
+        )
+        self.wait()
+
+        # 2
+        self.play(
+            x1.animate.set_value(0.5), 
+            x2.animate.set_value(1),
+            run_time=1,
+            rate_func=smooth
+        )
+        self.add(
+            Vector([2* x1.get_value() + 2*x2.get_value(), 2*x1.get_value() + -1*x2.get_value()], color=ORANGE)
+        )
+        self.wait()
+
+        # 3
+        self.play(
+            x1.animate.set_value(-0.5), 
+            x2.animate.set_value(-2),
+            run_time=1,
+            rate_func=smooth
+        )
+        self.add(
+            Vector([2* x1.get_value() + 2*x2.get_value(), 2*x1.get_value() + -1*x2.get_value()], color=ORANGE)
+        )
+        self.wait()
+
+        # 4
+        self.play(
+            x1.animate.set_value(-1), 
+            x2.animate.set_value(0.25),
+            run_time=1,
+            rate_func=smooth
+        )
+        self.add(
+            Vector([2* x1.get_value() + 2*x2.get_value(), 2*x1.get_value() + -1*x2.get_value()], color=ORANGE)
+        )
+        self.wait()
+
+        # 5
+        self.play(
+            x1.animate.set_value(-1), 
+            x2.animate.set_value(-0.5),
+            run_time=1,
+            rate_func=smooth
+        )
+        self.add(
+            Vector([2* x1.get_value() + 2*x2.get_value(), 2*x1.get_value() + -1*x2.get_value()], color=ORANGE)
+        )
+        self.wait()
+
+        # 6
+        self.play(
+            x1.animate.set_value(-0.5), 
+            x2.animate.set_value(1.5),
+            run_time=1,
+            rate_func=smooth
+        )
+        self.add(
+            Vector([2* x1.get_value() + 2*x2.get_value(), 2*x1.get_value() + -1*x2.get_value()], color=ORANGE)
         )
         self.wait()
 
 
         self.play(
-            FadeOut(x1a1, x1a1_label, xasum)
+            FadeOut(x1a1, x1a1_label, x2a2, x2a2_label)
         )
         self.wait(3)
