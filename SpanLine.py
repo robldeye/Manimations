@@ -63,6 +63,8 @@ class SpanLine(Scene):
 
         a2_grp = VGroup(a2, a2_label)
         linegroup = VGroup(x1a1, x1a1_label, span_a2, span_label)
+        fillgroup = VGroup()
+        fillgroup.add(*[span_a2 for x1 in range(-3,3)])
 
         # Get to position
         self.add(grid)
@@ -87,5 +89,6 @@ class SpanLine(Scene):
         self.wait(1)
         self.play(x1.animate.set_value(-3), run_time=6, rate_func=linear)
         self.play(FadeOut(linegroup))
+        self.add(fillgroup)
         self.play(Write(title))
         self.wait(3)

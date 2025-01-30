@@ -2,7 +2,7 @@ from manim import *
 
 class SpanEx(Scene):
     def construct(self):
-        # Create the number plane (grid)
+        # Grid
         grid = NumberPlane(
             x_range=(-10,10,1),
             y_range=(-5,5,1),
@@ -12,47 +12,34 @@ class SpanEx(Scene):
         )
 
         # Mobjects
-        v1 = Vector([1,-1], color=GREEN)
-        v2 = Vector([-2, 0.5], color=YELLOW)
-        vsum = Vector([-1, -0.5], color=PURPLE)
+        a1 = Vector([2,2], color=GREEN)
+        a2 = Vector([2, -1], color=YELLOW)
+        asum = Vector([4, 1], color=ORANGE)
         x1 = ValueTracker(1)
         x2 = ValueTracker(1)
-        x1v1 = always_redraw(
-            lambda: Vector([x1.get_value(),-1*x1.get_value()], color=GREEN)
+        x1a1 = always_redraw(
+            lambda: Vector([2*x1.get_value(),2*x1.get_value()], color=GREEN)
         )
-        x2v2 = always_redraw(
-            lambda: Vector([-2*x2.get_value(), 0.5*x2.get_value()], color=YELLOW)
+        x2a2 = always_redraw(
+            lambda: Vector([2*x2.get_value(), -1*x2.get_value()], color=YELLOW).shift(x1a1.get_end())
         )
-        xvsum = always_redraw(
-            lambda: Vector([-2*x2.get_value(), 0.5*x2.get_value()], color=YELLOW).shift(Vector([x1.get_value(),-1*x1.get_value()], color=GREEN).get_end())  
+        xasum = always_redraw(
+            lambda: Vector([2*x1.get_value() + 2*x2.get_value(), 2*x1.get_value() -1*x2.get_value()], color=ORANGE)  
         )
-        span_v1 = Line(
-            start=-6*v1.get_unit_vector(),
-            end=6*v1.get_unit_vector(),
-            color=PURPLE,
-            stroke_width=2,
-        )
-
 
         # Labels
-        v1_def = MathTex(r"\mathbf{v}_1=\begin{bmatrix} 1 \\ -1 \end{bmatrix}", color=GREEN).to_edge(UL)
-        v1_label = always_redraw(
-            lambda: MathTex(r"\mathbf{v}_1", color=GREEN).next_to(v1.get_center(), RIGHT)
+        a1_def = MathTex(r"\vec{a}_1=\begin{bmatrix} 2 \\ 2 \end{bmatrix}", color=GREEN).to_edge(UL)
+        a1_label = MathTex(r"\vec{a}_1", color=GREEN).next_to(a1.get_center(), UL)
+        a2_def = MathTex(r"\vec{a}_2=\begin{bmatrix} 2 \\ -1 \end{bmatrix}", color=YELLOW).next_to(a1_def, DOWN)
+        a2_label = MathTex(r"\vec{a}_2", color=YELLOW).next_to(a2.get_center(), DOWN)
+        asum_label = MathTex(r"\vec{a}_1 + \vec{a}_2", color=ORANGE).next_to(asum.get_end(), RIGHT)
+        x1a1_label = always_redraw(
+            lambda: MathTex(f"{x1.get_value():.2f}" r"\vec{a}_1", color=GREEN).next_to(x1a1.get_center(), UL)
         )
-        vsum_label = MathTex(r"\mathbf{v}_1 + \mathbf{v}_2", color=PURPLE).next_to(vsum.get_center(), UL)
-        x1v1_label = always_redraw(
-            lambda: MathTex(f"{x1.get_value():.2f}" r"\mathbf{v}_1", color=GREEN).next_to(x1v1.get_center(), RIGHT)
+        x2a2_label = always_redraw(
+            lambda: MathTex(f"{x2.get_value():.2f}" r"\vec{a}_2", color=YELLOW).next_to(x2a2.get_center(), DOWN)
         )
-        v2_def = MathTex(r"\mathbf{v}_2=\begin{bmatrix} -2 \\ 0.5 \end{bmatrix}", color=YELLOW).next_to(v1_def, DOWN)
-        v2_label = always_redraw(
-            lambda: MathTex(r"\mathbf{v}_2", color=YELLOW).next_to(v2.get_center(), DOWN)
-        )
-        xvsum_label = always_redraw(
-            lambda: MathTex(r"x_2 \mathbf{v}_2", color=YELLOW).next_to(xvsum.get_center(), DOWN)
-        )
-        #sum_label = MathTex(r"x_1 \mathbf{v}_1 + x_2 \mathbf{v}_2")
-        span_label = MathTex(r"\text{Span}(\mathbf{v}_1)", color=YELLOW).next_to(v1.get_end(), RIGHT, buff=0.2)
-        title = MathTex(r"\text{Span}(\{\mathbf{v}_1, \mathbf{v}_2\})=\mathbb{R}^2", color=PURPLE).to_edge(UP)
+        title = MathTex(r"\text{Some vectors in} \, \text{Span}(\{\vec{a}_1, \vec{a}_2\})").to_edge(UP).scale(1.25)
 
 
 
@@ -60,55 +47,40 @@ class SpanEx(Scene):
         # Vector Addition
         self.add(grid)
         self.wait()
-        self.play(Write(v1_def))
-        self.play(Write(v2_def))
-        self.play(FadeIn(v1, v2, v1_label, v2_label, run_time=1))
+        self.play(Write(a1_def))
+        self.play(Write(a2_def))
+        self.play(FadeIn(a1, a2, a1_label, a2_label, run_time=1))
         self.wait()
-
-        v2group = VGroup(v2, v2_label)
-
         self.play(
-            v2group.animate.shift(v1.get_end()),
+            a2.animate.shift(a1.get_end()),
+            a2_label.animate.shift(a1.get_end(), UP)
         )
         self.wait()
-        self.play(FadeIn(vsum, vsum_label))
+        self.play(FadeIn(asum, asum_label))
         self.wait()
 
         
         # Scaling v_1 and v_2 to obtain elements of their Span
         self.play(
-            FadeOut(v1, v1_label, v2, v2_label, vsum, vsum_label),
-            FadeIn(x1v1, x1v1_label, xvsum, xvsum_label)
+            FadeOut(a1, a1_label, a2, a2_label, asum),
+            FadeIn(x1a1, x1a1_label, x2a2, x2a2_label)
         )
         self.wait()
+        self.play(Write(title))
 
         # 1
         self.play(
-            x1.animate.set_value(2), 
+            x1.animate.set_value(1), 
             x2.animate.set_value(-1),
             run_time=1,
             rate_func=smooth
         )
         self.add(
-            Vector([x1.get_value() - 2*x2.get_value(), -1*x1.get_value() + 0.5*x2.get_value()], color=PURPLE)
+            Vector([2* x1.get_value() + 2*x2.get_value(), 2*x1.get_value() + -1*x2.get_value()], color=ORANGE)
         )
-        self.wait(0.5)
-
+        self.wait()
 
         # 2
-        self.play(
-            x1.animate.set_value(1), 
-            x2.animate.set_value(-3),
-            run_time=1,
-            rate_func=smooth
-        )
-        self.add(
-            Vector([x1.get_value() - 2*x2.get_value(), -1*x1.get_value() + 0.5*x2.get_value()], color=PURPLE)
-        )
-        self.wait(0.5)
-
-
-        # 3
         self.play(
             x1.animate.set_value(-1), 
             x2.animate.set_value(1),
@@ -116,88 +88,12 @@ class SpanEx(Scene):
             rate_func=smooth
         )
         self.add(
-            Vector([x1.get_value() - 2*x2.get_value(), -1*x1.get_value() + 0.5*x2.get_value()], color=PURPLE)
+            xasum.copy()
         )
-        self.wait(0.5)
-
-
-        # 4
-        self.play(
-            x1.animate.set_value(1), 
-            x2.animate.set_value(1.5),
-            run_time=1,
-            rate_func=smooth
-        )
-        self.add(
-            Vector([x1.get_value() - 2*x2.get_value(), -1*x1.get_value() + 0.5*x2.get_value()], color=PURPLE)
-        )
-        self.wait(0.5)
-
-
-        # 5
-        self.play(
-            x1.animate.set_value(2), 
-            x2.animate.set_value(2),
-            run_time=1,
-            rate_func=smooth
-        )
-        self.add(
-            Vector([x1.get_value() - 2*x2.get_value(), -1*x1.get_value() + 0.5*x2.get_value()], color=PURPLE)
-        )
-        self.wait(0.5)
-
-
-        # 6
-        self.play(
-            x1.animate.set_value(0.5), 
-            x2.animate.set_value(1),
-            run_time=1,
-            rate_func=smooth
-        )
-        self.add(
-            Vector([x1.get_value() - 2*x2.get_value(), -1*x1.get_value() + 0.5*x2.get_value()], color=PURPLE)
-        )
-        self.wait(0.5)
-
-
-        # 7
-        self.play(
-            x1.animate.set_value(1.5), 
-            x2.animate.set_value(1),
-            run_time=1,
-            rate_func=smooth
-        )
-        self.add(
-            Vector([x1.get_value() - 2*x2.get_value(), -1*x1.get_value() + 0.5*x2.get_value()], color=PURPLE)
-        )
-        self.wait(0.5)
+        self.wait()
 
 
         self.play(
-            FadeOut(x1v1, x1v1_label, xvsum, xvsum_label)
+            FadeOut(x1a1, x1a1_label, xasum)
         )
-        
-        #Swap v1 for Span(v1)
-        #self.play(
-            #FadeOut(
-                #x1v1, 
-                #x1v1_label
-            #),
-            #FadeIn(
-                #v1, 
-                #v1_label
-            #),
-            #Transform(
-                #v1, 
-                #span_v1
-            #),
-            #Transform(
-                #v1_label, 
-                #span_label
-            #),
-            #run_time=3,
-        #)
-
-        # Hold Final
-        self.play(Write(title))
         self.wait(3)
