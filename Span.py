@@ -2,67 +2,65 @@ from manim import *
 
 class Span(Scene):
     def construct(self):
-        # Create the number plane (grid)
+        # Grid
         grid = NumberPlane(
-            background_line_style={"stroke_color": BLUE, "stroke_opacity": 0.5}
+            x_range=(-10,10,1),
+            y_range=(-5,5,1),
+            background_line_style={"stroke_color": BLUE, "stroke_width": 2, "stroke_opacity": 0.8},
+            faded_line_style={"stroke_color": BLUE, "stroke_width": 1, "stroke_opacity": 0.5},
+            faded_line_ratio=2,
         )
 
-        # Create Mobjects
-        v = np.array([1,-1,0])
-        c = ValueTracker(-4)
-        cv = lambda: np.array([c.get_value(), -1*c.get_value(), 0])
-        v_arrow=Arrow(
-            start=ORIGIN,
-            end=v,
-            buff=0,
-            color=RED,
-            stroke_width=4,
+        # Mobjects
+        a1 = Vector([2,2], color=GREEN)
+        x1 = ValueTracker(1)
+        x1a1 = Vector([2*x1.get_value(), 2*x1.get_value()], color=GREEN)
+        x1a1.add_updater(
+            lambda l: l.become(Vector([2*x1.get_value(), 2*x1.get_value()], color=GREEN))
         )
-        cv_arrow=always_redraw(
-                lambda: Arrow(
-                start=ORIGIN,
-                end=cv(),
-                buff=0,
-                color=YELLOW,
-                stroke_width=4,
-            )
-        )
-        span_v = Line(
-            start=6*v,
-            end=-6*v,
-            color=YELLOW,
+        span_a1 = Line(
+            start=6*a1.get_unit_vector(),
+            end=-6*a1.get_unit_vector(),
+            color=GREEN,
             stroke_width=4,
         )
 
 
-        # Label the transformation matrix
-        v_label = MathTex(r"\mathbf{v}=\begin{bmatrix} 1 \\ -1 \end{bmatrix}", color=RED).next_to(v_arrow, UR, buff=-0.2)
-        cv_label = always_redraw(
-            lambda: MathTex(r"c \mathbf{v}", color=YELLOW).next_to(cv_arrow, UR)
+        # Labels
+        a1_label = MathTex(r"\vec{a}_1", color=GREEN).next_to(a1.get_end())
+        a1_def = MathTex(r"\vec{a}_1=\begin{bmatrix} 2 \\ 2 \end{bmatrix}", color=GREEN).to_edge(UL)
+        x1a1_label = always_redraw(
+            lambda: MathTex(f"{x1.get_value():.2f}" r"\vec{a}_1", color=GREEN).next_to(x1a1.get_end())
         )
-        c_label = always_redraw(
-            lambda: MathTex(f"c = {c.get_value():.2f}", color=YELLOW).next_to(grid.c2p(2,2))
+        x1_def = always_redraw(
+            lambda: MathTex(f"x_1 = {x1.get_value():.2f}").next_to(a1_def, DOWN)
         )
-        span_label = MathTex(r"\text{Span}(\mathbf{v})", color=YELLOW).next_to(v_arrow, UR)
+        span_label = MathTex(r"\text{Span}(\{\vec{a}_1\})", color=GREEN).next_to(span_a1.get_center(), DR)
+        title = MarkupText("Span").to_edge(UP)
+        title2 = MathTex(r"\text{Span}(\{\vec{a}_1\})=\{x_1\vec{a}_1 \mid x_1 \in \mathbb{R}\}").to_edge(UP).scale(0.9)
 
-        # Add the grid, label, and basis vectors to the scene
-        self.add(grid, v_arrow, v_label,)
+        # Manimation
 
-        # Animate
-        self.play(FadeIn(grid, v_arrow, v_label, run_time=1))
+        self.add(grid)
+        self.play(Write(title))
+        self.play(Write(a1_def))
+        self.play(FadeIn(a1, a1_label, run_time=1))
+        self.wait()
+
+        self.play(
+            FadeOut(a1, a1_label),
+            FadeIn(x1a1, x1a1_label)
+        )
+        self.wait(1)
+        self.play(Write(x1_def))
+        self.play(x1.animate.set_value(2), run_time=1, rate_func=linear)
+        self.wait(1)
+        self.play(x1.animate.set_value(-2), run_time=4, rate_func=linear)
         self.wait(1)
         self.play(
-            Create(cv_arrow),
-            FadeIn(cv_label, c_label),
+            FadeOut(x1a1, x1a1_label),
+            FadeIn(span_a1, span_label)
         )
-        self.play(c.animate.set_value(4), run_time=8, rate_func=linear)
-        self.play(
-            FadeOut(cv_arrow, cv_label, c_label),
-            FadeIn(v_arrow, v_label),
-            Transform(v_arrow, span_v),
-            Transform(v_label, span_label),
-            run_time=2,
-        )
-
-        # Hold the final scene
-        self.wait(3)
+        self.wait(2)
+        self.play(Transform(title, title2))
+        self.wait(2)
