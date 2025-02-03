@@ -43,7 +43,7 @@ class SpanEx(Scene):
         x2a2_label = always_redraw(
             lambda: MathTex(f"{x2.get_value():.2f}" r"\vec{a}_2", color=YELLOW).next_to(x2a2.get_center(), UR)
         )
-        title = MathTex(r"\text{Some vectors in} \, \text{Span}(\{\vec{a}_1, \vec{a}_2\})").to_edge(UP)
+        title = MathTex(r"\text{Some vectors in} \,\, \text{Span}(\{\vec{a}_1, \vec{a}_2\})").to_edge(UP)
 
 
 
