@@ -1,0 +1,12 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/3708357105_3467822883_17556978.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_1134590361_1447564549.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_3467822883_3323548085.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_319827058_423667957.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_3467822883_717664765.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_1392238862_3924720510.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_3467822883_885774614.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_601052274_1031591571.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_3467822883_4146684253.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_1652846145_18793464.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/issue/480p15/partial_movie_files/span3d/453992516_3793132056_4251275444.mp4'

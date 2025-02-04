@@ -1,0 +1,12 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/3977891868_4204419121_223132457.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_1693710557_1646301739.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_1393739487_2138212705.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_2268332985_1552379133.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_2627476556_1679225152.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_439049869_2994539641.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_2268332985_2860173543.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_257010671_3694905750.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_2268332985_3612547228.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_395998424_4215200236.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/FTCp2/1080p60/partial_movie_files/FTCp2/2852726489_634017564_2958150088.mp4'
