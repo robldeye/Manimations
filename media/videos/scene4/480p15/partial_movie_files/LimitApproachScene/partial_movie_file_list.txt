@@ -1,9 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/scene4/480p15/partial_movie_files/LimitApproachScene/1185818338_4218469939_366796583.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/scene4/480p15/partial_movie_files/LimitApproachScene/624642324_3249908911_739314115.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/scene4/480p15/partial_movie_files/LimitApproachScene/624642324_4139853735_679573734.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/scene4/480p15/partial_movie_files/LimitApproachScene/624642324_3546373240_111461304.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/scene4/480p15/partial_movie_files/LimitApproachScene/624642324_1635300730_3505443655.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/scene4/480p15/partial_movie_files/LimitApproachScene/624642324_4226121474_606755196.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/scene4/480p15/partial_movie_files/LimitApproachScene/624642324_1951027693_951008722.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/scene4/480p15/partial_movie_files/LimitApproachScene/624642324_123554531_1919494046.mp4'

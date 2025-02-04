@@ -1,5 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/LinTranScene/480p15/partial_movie_files/LinearTransformationWithAxes/1185818338_1295389401_1937128199.mp4'
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/LinTranScene/480p15/partial_movie_files/LinearTransformationWithAxes/624642324_10688572_1567000154.mp4'
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/LinTranScene/480p15/partial_movie_files/LinearTransformationWithAxes/624642324_1702676732_3631729570.mp4'
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/LinTranScene/480p15/partial_movie_files/LinearTransformationWithAxes/624642324_634017564_3588913568.mp4'

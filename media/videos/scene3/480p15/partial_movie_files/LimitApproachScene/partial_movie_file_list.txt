@@ -1,7 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/scene3/480p15/partial_movie_files/LimitApproachScene/1185818338_2124937745_396524086.mp4'
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/scene3/480p15/partial_movie_files/LimitApproachScene/624642324_3003028840_4195607588.mp4'
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/scene3/480p15/partial_movie_files/LimitApproachScene/624642324_3546373240_4248657055.mp4'
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/scene3/480p15/partial_movie_files/LimitApproachScene/624642324_2628207499_2721472244.mp4'
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/scene3/480p15/partial_movie_files/LimitApproachScene/624642324_4226121474_2274389338.mp4'
-file 'file:C:/Users/sonik/Desktop/Project/media/videos/scene3/480p15/partial_movie_files/LimitApproachScene/624642324_123554531_438008359.mp4'

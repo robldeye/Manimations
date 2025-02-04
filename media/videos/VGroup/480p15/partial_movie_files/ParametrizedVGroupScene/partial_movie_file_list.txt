@@ -1,3 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/sonik/Manimations/media/videos/VGroup/480p15/partial_movie_files/ParametrizedVGroupScene/1185818338_393750171_2798971600.mp4'
-file 'file:C:/Users/sonik/Manimations/media/videos/VGroup/480p15/partial_movie_files/ParametrizedVGroupScene/624642324_2688965532_1650635909.mp4'
