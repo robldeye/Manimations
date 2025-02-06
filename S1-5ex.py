@@ -21,7 +21,7 @@ class null(ThreeDScene):
             [0, -1, 2]
         ]
 
-        cube = Cube(side_length=5, fill_opacity=0.25, color=BLUE)
+        cube = Cube(side_length=2, fill_opacity=0.25, color=BLUE)
         surf = Surface(
             lambda u, v: np.array([
                 3*u-4*v,
@@ -34,7 +34,7 @@ class null(ThreeDScene):
             fill_opacity=0.25, 
             resolution=(15, 32)
         )
-        null = Line(axes.c2p(-5, -10, -5), axes.c2p(5, 10, 5), color=YELLOW)
+        null = Line(axes.c2p(-5, -10, -5), axes.c2p(5, 10, 5), color=YELLOW, stroke_width=2)
         zero = Dot(color=YELLOW).move_to(axes.c2p(0,0,0))
 
         # Labels
@@ -43,17 +43,16 @@ class null(ThreeDScene):
         label2 = MathTex(r"A\text{Span}\left(\left\{\begin{bmatrix} 1 \\ 2 \\ 1 \end{bmatrix}\right\}\right) = \vec{0}").to_corner(UR).scale(0.7)
 
         # Mobject groups
-        vector_grp = VGroup(cube, basis_vector_1, basis_vector_2, basis_vector_3)
+        vector_grp = VGroup(cube)
 
         # Initialize scene
-        self.set_camera_orientation(phi=75 * DEGREES, theta=45 * DEGREES)
-        self.add(vector_grp, label, null)
+        self.set_camera_orientation(phi=80 * DEGREES, theta=45 * DEGREES)
+        self.add(null)
         self.add_fixed_in_frame_mobjects(label, null_def)
         self.wait(1)
 
-        # Transformatio
+        # Transformation
         self.play(
-            vector_grp.animate.apply_matrix(matrix),
             Transform(null, zero),
             run_time=5)
         
