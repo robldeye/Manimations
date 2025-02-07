@@ -48,8 +48,11 @@ class li(Scene):
         x2a2_label = always_redraw(
             lambda: MathTex(f"{x2.get_value():.2f}" r"\vec{a}_2", color=YELLOW).next_to(x2a2.get_center(), DL)
         )
-        title1 = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2\}) =", r"\text{a line}").to_edge(UP)
+        title1 = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2\}) =", r"\, \text{a plane}").to_edge(UP)
         title1[1].set_color(ORANGE)
+        title2 = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2\}) =", r"\mathbb{R}^2").to_edge(UP)
+        title2[1].set_color(ORANGE)
+        expl = MarkupText("Some linear combinations...").to_edge(UP).scale(0.75)
 
         # VGroups
         a2_grp = VGroup(a2, a2_label)
@@ -69,6 +72,7 @@ class li(Scene):
 
         
         # Scaling v_1 and v_2 to obtain elements of their Span
+        self.play(Write(expl))
         self.play(
             FadeOut(a1, a1_label, a2, a2_label, asum_label),
             FadeIn(x1a1, x1a1_label, x2a2, x2a2_label)
@@ -86,7 +90,7 @@ class li(Scene):
         self.add(v1)
         self.wait()
 
-        # 1
+        # 2
         self.play(
             x1.animate.set_value(-1), 
             x2.animate.set_value(1),
@@ -97,7 +101,7 @@ class li(Scene):
         self.add(v2)
         self.wait()
 
-        # 2
+        # 3
         self.play(
             x1.animate.set_value(0.5), 
             x2.animate.set_value(1),
@@ -108,7 +112,7 @@ class li(Scene):
         self.add(v3)
         self.wait()
 
-        # 3
+        # 4
         self.play(
             x1.animate.set_value(-1), 
             x2.animate.set_value(-1),
@@ -121,8 +125,10 @@ class li(Scene):
 
 
         self.play(
-                FadeOut(a1_def, a2_def, x1a1, x1a1_label, x2a2, x2a2_label, asum, v1, v2, v3, v4),
+                FadeOut(a1_def, a2_def, x1a1, x1a1_label, x2a2, x2a2_label, asum, expl, v1, v2, v3, v4),
                 FadeIn(span)
         )
         self.play(Write(title1))
-        self.wait(2)
+        self.wait()
+        self.play(Transform(title1, title2))
+        self.wait(3)

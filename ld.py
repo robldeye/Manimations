@@ -51,6 +51,7 @@ class ld(Scene):
         )
         title1 = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2\}) =", r"\text{a line}").to_edge(UP)
         title1[1].set_color(ORANGE)
+        expl = MarkupText("Some linear combinations...").to_edge(UP).scale(0.75)
 
         # VGroups
         a2_grp = VGroup(a2, a2_label)
@@ -70,6 +71,7 @@ class ld(Scene):
 
         
         # Scaling v_1 and v_2 to obtain elements of their Span
+        self.play(Write(expl))
         self.play(
             FadeOut(a1, a1_label, a2, a2_label, asum_label),
             FadeIn(x1a1, x1a1_label, x2a2, x2a2_label)
@@ -100,7 +102,7 @@ class ld(Scene):
 
         # 2
         self.play(
-            x1.animate.set_value(0.5), 
+            x1.animate.set_value(1.5), 
             x2.animate.set_value(1),
             run_time=1,
             rate_func=smooth
@@ -122,7 +124,7 @@ class ld(Scene):
 
 
         self.play(
-                FadeOut(a1_def, a2_def, x1a1, x1a1_label, x2a2, x2a2_label, asum, v1, v2, v3, v4),
+                FadeOut(a1_def, a2_def, x1a1, x1a1_label, x2a2, x2a2_label, asum, expl, v1, v2, v3, v4),
                 FadeIn(span)
         )
         self.play(Write(title1))
