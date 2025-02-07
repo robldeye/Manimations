@@ -13,19 +13,19 @@ class li3d(ThreeDScene):
 
         # Mobjects
         a1 = Vector(grid.c2p(2, 2, 0), color=GREEN)
-        a2 = Vector(grid.c2p(1, -1, -1), color=YELLOW)
+        a2 = Vector(grid.c2p(1, 0, -1), color=YELLOW)
         a3 = Vector(grid.c2p(1, 1, 1), color=BLUE)
         x1 = ValueTracker(1)
         x1a3 = always_redraw(
             lambda: Vector(grid.c2p(x1.get_value(), x1.get_value(), x1.get_value()), color=BLUE)
         )
 
-        spana1a2 = Surface(
-            lambda u, v: grid.c2p(2*u+v, 2*u-v, -v),
-            u_range=[-5, 5], 
-            v_range=[-5, 5],
-            checkerboard_colors=[ORANGE, ORANGE],
-            fill_opacity=0.35
+        spana1a2 = Polygon(
+            grid.c2p(6,4,-2), grid.c2p(2, 4, 2), grid.c2p(-6, -4, 2), grid.c2p(-2, -4, -2),
+            color=ORANGE, 
+            fill_color=ORANGE,
+            fill_opacity=0.25,
+            stroke_width=0
         )
 
         spanall = Cube(
@@ -35,19 +35,18 @@ class li3d(ThreeDScene):
         ).shift(grid.c2p(0, 0, 0))
 
         # Labels
-        a1_def = MathTex(r"\vec{a}_1=\begin{bmatrix} 2 \\ 2 \\ 0 \end{bmatrix}").to_edge(UL)
-        a2_def = MathTex(r"\vec{a}_2=\begin{bmatrix} 1 \\ -1 \\ -1 \end{bmatrix}").next_to(a1_def, DOWN)
-        a3_def = MathTex(r"\vec{a}_3=\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}").next_to(a2_def, DOWN)
+        a1_def = MathTex(r"\vec{a}_1=\begin{bmatrix} 2 \\ 2 \\ 0 \end{bmatrix}").to_edge(UL).scale(0.5)
+        a2_def = MathTex(r"\vec{a}_2=\begin{bmatrix} 1 \\ 0 \\ -1 \end{bmatrix}").next_to(a1_def, RIGHT).scale(0.5)
+        a3_def = MathTex(r"\vec{a}_3=\begin{bmatrix} 1 \\ 1 \\ 1 \end{bmatrix}").next_to(a2_def, RIGHT).scale(0.5)
         a1_label = MathTex(r"\vec{a}_1").next_to(a1.get_center(), UL).rotate(PI/2,axis=RIGHT)
         a2_label = MathTex(r"\vec{a}_2").next_to(a2.get_center(), DL).rotate(PI/2,axis=RIGHT)
         a3_label = MathTex(r"\vec{a}_3").next_to(a3.get_center(), DL).rotate(PI/2,axis=RIGHT)
         x1a3_label = always_redraw(
             lambda: MathTex(f"{x1.get_value():.2f}" r"\vec{a}_3").next_to(x1a3.get_center(), UL).rotate(PI/2,axis=RIGHT)
         )
-        span_def = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2}\})", color=ORANGE).next_to(a3_def, DOWN).shift(RIGHT)
-        title = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2, \vec{a}_3\}) = \,", r"\text{all of} \, \mathbb{R}^3").next_to(a3_def, DOWN))
-        title[1].set_color(ORANGE)
-        title2 = MathTex(r"\text{Sliding} \, \text{Span}(\{\vec{a}_1, \vec{a}_2}\}) \, \text{along} \, x_1 \vec{a}_3 \, \text{...}").to_edge(UR).scale(0.75)
+        span_def = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2}\})", color=ORANGE).to_edge(DL).scale(0.75)
+        title = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2, \vec{a}_3\}) = \mathbb{R}^3").to_edge(UR).scale(0.75)
+        title2 = MathTex(r"\text{Sliding along} \, x_1 \vec{a}_3 \, \text{...}").to_edge(UR).scale(0.75)
 
         # VGroups
 
@@ -81,7 +80,7 @@ class li3d(ThreeDScene):
         self.play(spana1a2.animate.move_to(x1a3.get_end()))
         self.move_camera(phi=85 * DEGREES, theta=-45 * DEGREES)
 
-        #self.begin_ambient_camera_rotation(25*DEGREES, about='theta')
+        self.begin_ambient_camera_rotation(34*DEGREES, about='theta')
 
         self.add_fixed_in_frame_mobjects(title2)
         spana1a2.add_updater(
@@ -100,10 +99,10 @@ class li3d(ThreeDScene):
         self.wait(2)
 
         self.play(
-            FadeOut(spana1a2),
+            FadeOut(spana1a2, x1a3, x1a3_label),
             #FadeIn(spanall),
         )
-        #self.stop_ambient_camera_rotation(about='theta')
-        self.remove(span_def)
+        self.stop_ambient_camera_rotation(about='theta')
+        self.remove(span_def, title2)
         self.add_fixed_in_frame_mobjects(title)
         self.wait(3)
