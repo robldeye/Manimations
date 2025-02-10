@@ -52,8 +52,9 @@ class ld3d(ThreeDScene):
         x1a3_label = always_redraw(
             lambda: MathTex(r"x_1\vec{a}_3").next_to(x1a3.get_center(), UL).rotate(PI/2,axis=RIGHT)
         )
+        #deprel_def = MathTex(r"\vec{a}_1 - \vec{a}_2 - \vec{a}_3 = \vec{0}").next_to(x1_label, 1.1*RIGHT).scale(0.65)
         span_def = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2}\})", color=ORANGE).to_edge(DL).scale(0.75)
-        title = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2, \vec{a}_3\}) = \mathbb{R}^3").to_edge(UR).scale(0.75)
+        title = MathTex(r"\text{Span}(\{\vec{a}_1, \vec{a}_2, \vec{a}_3\}) = \, \text{a plane in} \, \mathbb{R}^3").to_edge(UR).scale(0.75)
         title2 = MathTex(r"\text{Sliding along} \, x_1 \vec{a}_3 \, \text{...}").to_edge(UR).scale(0.75)
 
         # VGroups
@@ -92,7 +93,7 @@ class ld3d(ThreeDScene):
 
         self.play(spana1a2.animate.move_to(x1a3.get_end()))
 
-        self.begin_ambient_camera_rotation(30*DEGREES, about='theta')
+        self.begin_ambient_camera_rotation(45*DEGREES, about='theta')
 
         self.add_fixed_in_frame_mobjects(title2)
         spana1a2.add_updater(
@@ -103,6 +104,10 @@ class ld3d(ThreeDScene):
             run_time=2,
             rate_func=linear
         )
+
+        self.stop_ambient_camera_rotation(about='theta')
+        #self.add_fixed_in_frame_mobjects(deprel_def)
+
         self.play(
             x1.animate.set_value(-3),
             run_time=5, 
@@ -116,10 +121,9 @@ class ld3d(ThreeDScene):
         self.wait(2)
 
         self.play(
-            FadeOut(spana1a2, x1a3, x1a3_dot, x1a3_label, x1_label),
+            FadeOut(x1a3, x1a3_dot, x1a3_label, x1_label),
             #FadeIn(spanall),
         )
-        self.stop_ambient_camera_rotation(about='theta')
         self.remove(span_def, title2)
         self.add_fixed_in_frame_mobjects(title)
         self.wait(3)
