@@ -36,6 +36,9 @@ class ld(Scene):
             color=ORANGE,
             stroke_width=3,
         )
+        centerdot = always_redraw(
+            Dot(color=Orange).next_to(x1a3.get_end())
+        )
 
         # Labels
         a1_def = MathTex(r"\vec{a}_1=\begin{bmatrix} 2 \\ 2 \end{bmatrix}", color=GREEN).to_edge(UL)
