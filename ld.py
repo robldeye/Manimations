@@ -36,8 +36,9 @@ class ld(Scene):
             color=ORANGE,
             stroke_width=3,
         )
-        centerdot = always_redraw(
-            Dot(color=Orange).next_to(x1a3.get_end())
+        centerdot = Dot(color=ORANGE)
+        centerdot.add_updater(
+            lambda c: c.move_to(x2a2.get_end())
         )
 
         # Labels
@@ -77,7 +78,7 @@ class ld(Scene):
         self.play(Write(expl))
         self.play(
             FadeOut(a1, a1_label, a2, a2_label, asum_label),
-            FadeIn(x1a1, x1a1_label, x2a2, x2a2_label)
+            FadeIn(x1a1, x1a1_label, x2a2, x2a2_label, centerdot)
         )
         self.wait()
 
@@ -127,7 +128,7 @@ class ld(Scene):
 
 
         self.play(
-                FadeOut(a1_def, a2_def, x1a1, x1a1_label, x2a2, x2a2_label, asum, expl, v1, v2, v3, v4),
+                FadeOut(a1_def, a2_def, x1a1, x1a1_label, x2a2, x2a2_label, asum, expl, v1, v2, v3, v4, centerdot),
                 FadeIn(span)
         )
         self.play(Write(title1))

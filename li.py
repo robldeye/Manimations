@@ -36,6 +36,11 @@ class li(Scene):
             fill_opacity=0.25
         )
 
+        centerdot = Dot(color=ORANGE)
+        centerdot.add_updater(
+            lambda c: c.move_to(x2a2.get_end())
+        )
+
         # Labels
         a1_def = MathTex(r"\vec{a}_1=\begin{bmatrix} 2 \\ 2 \end{bmatrix}", color=GREEN).to_edge(UL)
         a1_label = MathTex(r"\vec{a}_1", color=GREEN).next_to(a1.get_center(), DR)
@@ -75,7 +80,7 @@ class li(Scene):
         self.play(Write(expl))
         self.play(
             FadeOut(a1, a1_label, a2, a2_label, asum_label),
-            FadeIn(x1a1, x1a1_label, x2a2, x2a2_label)
+            FadeIn(x1a1, x1a1_label, x2a2, x2a2_label, centerdot)
         )
         self.wait()
 
@@ -125,7 +130,7 @@ class li(Scene):
 
 
         self.play(
-                FadeOut(a1_def, a2_def, x1a1, x1a1_label, x2a2, x2a2_label, asum, expl, v1, v2, v3, v4),
+                FadeOut(a1_def, a2_def, x1a1, x1a1_label, x2a2, x2a2_label, asum, expl, v1, v2, v3, v4, centerdot),
                 FadeIn(span)
         )
         self.play(Write(title1))
