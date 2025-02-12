@@ -1,6 +1,6 @@
 from manim import *
 
-class tran2(Scene):
+class transform2(Scene):
     def construct(self):
         # Grids
         grid = NumberPlane(
