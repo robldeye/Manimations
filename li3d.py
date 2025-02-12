@@ -103,17 +103,29 @@ class li3d(ThreeDScene):
             run_time=2,
             rate_func=linear
         )
+
         self.play(
-            x1.animate.set_value(-3),
-            run_time=5, 
+            x1.animate.set_value(1.75),
+            run_time=1, 
             rate_func=linear
         )
+
+        self.stop_ambient_camera_rotation(about='theta')
+
+        self.play(
+            x1.animate.set_value(-3),
+            run_time=4, 
+            rate_func=linear
+        )
+
+        self.begin_ambient_camera_rotation(45*DEGREES, about='theta')
+
         self.play(
             x1.animate.set_value(1),
-            run_time=2, 
-            rate_func=smooth
+            run_time=4, 
+            rate_func=linear
         )
-        self.wait(2)
+        self.wait()
 
         self.play(
             FadeOut(spana1a2, x1a3, x1a3_dot, x1a3_label, x1_label),

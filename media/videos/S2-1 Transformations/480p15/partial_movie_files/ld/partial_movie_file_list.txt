@@ -1,0 +1,13 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/1185818338_2424907286_223132457.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_2764561791_4225727559.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_2459602462_2685779802.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_123554531_2328177826.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_2329282259_312696660.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_759123760_3327515783.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_123554531_913212077.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_3058094013_293711513.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_2264900381_2774339731.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_634017564_1490114354.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_1917014169_2957406297.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/S2-1 Transformations/480p15/partial_movie_files/ld/624642324_4071659840_340924595.mp4'
