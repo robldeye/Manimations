@@ -93,7 +93,7 @@ class ld3d(ThreeDScene):
 
         self.play(spana1a2.animate.move_to(x1a3.get_end()))
 
-        self.begin_ambient_camera_rotation(45*DEGREES, about='theta')
+        self.begin_ambient_camera_rotation(30*DEGREES, about='theta')
 
         self.add_fixed_in_frame_mobjects(title2)
         spana1a2.add_updater(
@@ -105,25 +105,34 @@ class ld3d(ThreeDScene):
             rate_func=linear
         )
 
+        self.play(
+            x1.animate.set_value(1.75),
+            run_time=1, 
+            rate_func=linear
+        )
+
         self.stop_ambient_camera_rotation(about='theta')
-        #self.add_fixed_in_frame_mobjects(deprel_def)
 
         self.play(
             x1.animate.set_value(-3),
-            run_time=5, 
+            run_time=4, 
             rate_func=linear
         )
-        self.play(
-            x1.animate.set_value(1),
-            run_time=2, 
-            rate_func=smooth
-        )
-        self.wait(2)
+
+        self.begin_ambient_camera_rotation(45*DEGREES, about='theta')
 
         self.play(
-            FadeOut(x1a3, x1a3_dot, x1a3_label, x1_label),
+            x1.animate.set_value(1),
+            run_time=4, 
+            rate_func=linear
+        )
+        self.wait()
+
+        self.play(
+            FadeOut(spana1a2, x1a3, x1a3_dot, x1a3_label, x1_label),
             #FadeIn(spanall),
         )
+        self.stop_ambient_camera_rotation(about='theta')
         self.remove(span_def, title2)
         self.add_fixed_in_frame_mobjects(title)
         self.wait(3)
