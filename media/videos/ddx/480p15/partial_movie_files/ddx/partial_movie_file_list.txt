@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/ddx/480p15/partial_movie_files/ddx/1185818338_1405533483_223132457.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/ddx/480p15/partial_movie_files/ddx/624642324_123554531_630434405.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/ddx/480p15/partial_movie_files/ddx/624642324_3327354025_4144885859.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/ddx/480p15/partial_movie_files/ddx/624642324_123554531_4009670139.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/ddx/480p15/partial_movie_files/ddx/624642324_2739897873_694374407.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/ddx/480p15/partial_movie_files/ddx/624642324_123554531_2117127331.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/ddx/480p15/partial_movie_files/ddx/624642324_545662757_1478566982.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations/media/videos/ddx/480p15/partial_movie_files/ddx/624642324_634017564_2957618415.mp4'
