@@ -5,7 +5,7 @@ class ddx(MovingCameraScene):
         self.camera.frame.save_state()
 
         axes = NumberPlane(
-            background_line_style={"stroke_color": BLUE, "stroke_opacity": 0.25}
+            background_line_style={"stroke_color": BLUE, "stroke_opacity": 0.25},
         )
 
         # Mobjects
@@ -31,15 +31,15 @@ class ddx(MovingCameraScene):
         # Labels
         #FTC_text = MarkupText("Fundamental Theorem of Calculus part II").to_edge(UP)
         title = MarkupText("The Derivative").to_edge(UL)
-        slope_def = MathTex(r"\text{Slope}", r"= \frac{f(a+dx) - f(a)}{dx}").next_to(title, DOWN).scale(0.75)
-        deriv_def = MathTex(r"f'(a) = \lim_{dx \to 0} \frac{f(a+dx) - f(a)}{dx}").next_to(title, 1.3*DOWN).scale(0.75).shift(0.25*RIGHT)
+        slope_def = MathTex(r"\text{Slope}", r"= \frac{f(a+h) - f(a)}{h}").next_to(title, DOWN).scale(0.75)
+        deriv_def = MathTex(r"f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}").next_to(title, 1.3*DOWN).scale(0.75).shift(0.25*RIGHT)
         slope_def[0].set_color(RED)
         start_label = MathTex(r"a").next_to(axes.c2p(1, 0), 1.2*DOWN)
         fstart_label = MathTex(r"f(a)").next_to(axes.c2p(0, f(1)), LEFT)
-        end_label = MathTex(r"a+dx").next_to(axes.c2p(3, 0), DOWN)
-        fend_label = MathTex(r"f(a+dx)").next_to(axes.c2p(0, f(3)), LEFT)
+        end_label = MathTex(r"a+h").next_to(axes.c2p(3, 0), DOWN)
+        fend_label = MathTex(r"f(a+h)").next_to(axes.c2p(0, f(3)), LEFT)
         graph_label = MathTex(r"f(t)", color=BLUE).next_to(axes.c2p(4, 3))
-        lim_label = MathTex(r"\lim_{dx \to 0}").next_to(axes.c2p(3,2), DR).scale(0.75)
+        lim_label = MathTex(r"\lim_{h \to 0}").next_to(axes.c2p(3,2), DR).scale(0.75)
 
         # Dashed Lines
         start_line = DashedLine(
@@ -88,8 +88,8 @@ class ddx(MovingCameraScene):
                 dx=2,
                 dx_line_color=WHITE,
                 dy_line_color=WHITE,
-                dx_label="dx",
-                dy_label="f(a+dx) - f(a)",
+                dx_label="h",
+                dy_label="f(a+h) - f(a)",
                 secant_line_color=RED,
                 secant_line_length=30,
         )
