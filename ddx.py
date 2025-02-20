@@ -30,16 +30,16 @@ class ddx(MovingCameraScene):
 
         # Labels
         #FTC_text = MarkupText("Fundamental Theorem of Calculus part II").to_edge(UP)
-        title = MarkupText("The Derivative").to_edge(UL)
-        slope_def = MathTex(r"\text{Slope}", r"= \frac{f(a+h) - f(a)}{h}").next_to(title, DOWN).scale(0.75)
-        deriv_def = MathTex(r"f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h}").next_to(title, 1.3*DOWN).scale(0.75).shift(0.25*RIGHT)
+        title = MathTex(r"\text{The Derivative of} \, s \, \text{at} \, a").to_edge(UL).scale(0.75)
+        slope_def = MathTex(r"\text{Slope}", r"= \frac{s(b) - s(a)}{b-a}").next_to(title, DOWN).scale(0.75)
+        deriv_def = MathTex(r"s'(a) = \lim_{b \to a} \frac{s(b) - s(a)}{b-a}").next_to(title, 1.3*DOWN).scale(0.75).shift(0.25*RIGHT)
         slope_def[0].set_color(RED)
         start_label = MathTex(r"a").next_to(axes.c2p(1, 0), 1.2*DOWN)
-        fstart_label = MathTex(r"f(a)").next_to(axes.c2p(0, f(1)), LEFT)
-        end_label = MathTex(r"a+h").next_to(axes.c2p(3, 0), DOWN)
-        fend_label = MathTex(r"f(a+h)").next_to(axes.c2p(0, f(3)), LEFT)
-        graph_label = MathTex(r"f(t)", color=BLUE).next_to(axes.c2p(4, 3))
-        lim_label = MathTex(r"\lim_{h \to 0}").next_to(axes.c2p(3,2), DR).scale(0.75)
+        fstart_label = MathTex(r"s(a)").next_to(axes.c2p(0, f(1)), LEFT)
+        end_label = MathTex(r"b").next_to(axes.c2p(3, 0), DOWN)
+        fend_label = MathTex(r"s(b)").next_to(axes.c2p(0, f(3)), LEFT)
+        graph_label = MathTex(r"s(t)", color=BLUE).next_to(axes.c2p(4, 3))
+        lim_label = MathTex(r"\text{Slide} \, b \to a").next_to(axes.c2p(3,2), DR).scale(0.75)
 
         # Dashed Lines
         start_line = DashedLine(
@@ -57,8 +57,6 @@ class ddx(MovingCameraScene):
             Create(fgraph),
             Write(graph_label),
         )
-        self.wait()
-
         self.play(
             FadeIn(a_label_coord),
             FadeIn(dot),
@@ -67,7 +65,7 @@ class ddx(MovingCameraScene):
 
         self.play(
             x_value.animate.set_value(1), 
-            run_time=2, 
+            run_time=1, 
             rate_func=smooth
         )
         self.wait()
@@ -88,8 +86,8 @@ class ddx(MovingCameraScene):
                 dx=2,
                 dx_line_color=WHITE,
                 dy_line_color=WHITE,
-                dx_label="h",
-                dy_label="f(a+h) - f(a)",
+                dx_label="b-a",
+                dy_label="s(b) - s(a)",
                 secant_line_color=RED,
                 secant_line_length=30,
         )
@@ -141,7 +139,11 @@ class ddx(MovingCameraScene):
             Write(fend_label),
             Write(fend_line)
         )
-        self.wait(2)
+        self.wait(1)
+
+        self.play(
+            self.camera.frame.animate.scale(0.65).move_to(dot.get_center()+RIGHT),
+        )
 
         # Introduce Secant Lines
 
@@ -161,10 +163,6 @@ class ddx(MovingCameraScene):
         self.wait()
 
         self.play(
-            self.camera.frame.animate.scale(0.65).move_to(dot.get_center()+RIGHT),
-        )
-
-        self.play(
             FadeOut(secant_line),
             FadeIn(moving_secant)
         )
@@ -173,6 +171,13 @@ class ddx(MovingCameraScene):
         self.play(
             FadeIn(lim_label)
         )
+        
+        fend_line.add_updater(
+            lambda l: l.become(
+                
+            )
+        )
+
         self.play(
             dx_value.animate.set_value(0.001),
             run_time=6,
