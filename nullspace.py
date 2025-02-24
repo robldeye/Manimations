@@ -25,7 +25,10 @@ class nullspace(ThreeDScene):
 
         # Labels
         label = MathTex(r"A = \begin{bmatrix} 1 & 0 & 2 \\ 1 & 0 & 2 \\ -1 & 0 & -1 \end{bmatrix}").to_corner(UL).scale(0.7)
-        label2 = MathTex(r"A(\mathbb{R}^3) = \text{Span}\left(\begin{bmatrix} 1 \\ 1 \\ -1 \end{bmatrix}, \begin{bmatrix} 2 \\ 2 \\ -1 \end{bmatrix}\right)").to_corner(UR).scale(0.7)
+        label2 = MathTex(r"\text{Col}(A)", r" = \text{Span}\left(\begin{bmatrix} 1 \\ 1 \\ -1 \end{bmatrix}, \begin{bmatrix} 2 \\ 2 \\ -1 \end{bmatrix}\right)").to_corner(UR).scale(0.7)
+        label2[0].set_color(BLUE)
+        label3 = MathTex(r"\text{Nul}(A)", r" = \text{Span}\left(\begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}\right)").to_corner(DR).scale(0.7)
+        label3[0].set_color(GREEN)
         v_1_label = MathTex(r"\mathbf{v}_1", color=RED).next_to(v_1).scale(0.7)
         v_2_label = MathTex(r"\mathbf{v}_2", color=GREEN).next_to(v_2).scale(0.7)
         v_3_label = MathTex(r"\mathbf{v}_3", color=BLUE).next_to(v_3).scale(0.7)
@@ -63,7 +66,7 @@ class nullspace(ThreeDScene):
             rate_func=smooth
         )
         self.wait()
-        self.add_fixed_in_frame_mobjects(label2)
+        self.add_fixed_in_frame_mobjects(label2, label3)
 
         self.begin_ambient_camera_rotation(15*DEGREES, about='theta')
         
