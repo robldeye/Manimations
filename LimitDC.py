@@ -8,7 +8,7 @@ class LimitDC(Scene):
             y_range=[-5, 5, 1],
         ).add_coordinates()
         x_label = axes.get_x_axis_label("x").shift(DOWN)
-        y_label = axes.get_y_axis_label("y").shift(LEFT)
+        y_label = axes.get_y_axis_label("t").shift(LEFT)
 
         # Functions
         funcl = lambda x: x**2-4
@@ -50,11 +50,11 @@ class LimitDC(Scene):
             lambda: MathTex(f"{funcr(1+right_tracker.get_value()):.2f}", color=BLUE).next_to(right_dot, UP)
         )
 
-        limitl_label = MathTex(r"\lim_{x \to 1^-} f(x) = -3").next_to(limit_pointl, RIGHT).scale(0.75)
-        limitr_label = MathTex(r"\lim_{x \to 1^+} f(x) = 2").next_to(limit_pointr, RIGHT).scale(0.75)
-        func_label = MathTex(r"f(x)=\begin{cases}x^2-4 & x \leq 1\\x^2 +1 & x>1\end{cases}", color=BLUE).to_edge(DR).scale(0.75)
+        limitl_label = MathTex(r"\lim_{t \to 1^-} s(t) = -3").next_to(limit_pointl, RIGHT).scale(0.75)
+        limitr_label = MathTex(r"\lim_{t \to 1^+} s(t) = 2").next_to(limit_pointr, RIGHT).scale(0.75)
+        func_label = MathTex(r"s(t)=\begin{cases}t^2-4 & t \leq 1\\t^2 +1 & t>1\end{cases}", color=BLUE).to_edge(DR).scale(0.75)
         title = MarkupText("Jump Discontinuity").to_edge(UP).scale(0.8)
-        title2 = MathTex(r"\lim_{x \to 1} f(x) = \, \text{DNE}").to_edge(UP).scale(0.8)
+        title2 = MathTex(r"\lim_{t \to 1} s(t) = \, \text{DNE}").to_edge(UP).scale(0.8)
 
         # Lines
         left_line = always_redraw(
