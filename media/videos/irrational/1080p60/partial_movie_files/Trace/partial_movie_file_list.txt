@@ -1,0 +1,6 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/irrational/1080p60/partial_movie_files/Trace/3977891868_2560000190_223132457.mp4'
+file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/irrational/1080p60/partial_movie_files/Trace/2852726489_2949611678_1148410792.mp4'
+file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/irrational/1080p60/partial_movie_files/Trace/2852726489_1432596116_2385090555.mp4'
+file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/irrational/1080p60/partial_movie_files/Trace/2852726489_4142320886_1555408970.mp4'
+file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/irrational/1080p60/partial_movie_files/Trace/2852726489_682321507_2488007723.mp4'

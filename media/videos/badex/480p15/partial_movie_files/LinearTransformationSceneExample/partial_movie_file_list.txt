@@ -1,3 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/badex/480p15/partial_movie_files/LinearTransformationSceneExample/1185818338_795195354_3179792670.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/badex/480p15/partial_movie_files/LinearTransformationSceneExample/624642324_634017564_2023605515.mp4'
