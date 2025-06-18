@@ -1,5 +1,6 @@
 from manim import *
 import numpy as np
+from scipy.integrate import odeint
 
 class phase3d(ThreeDScene):
     def construct(self):
@@ -20,10 +21,18 @@ class phase3d(ThreeDScene):
                     locations.append([x, y, z])
 
         A = np.array([
-            [1, -1, 0],
-            [3, 2, 3],
-            [2, 1, 0]
+            [-0.2, -0.9, 0],
+            [0.1, -0.2, -0.9],
+            [0, -0.1, -0.2]
             ])
+        
+        def model(v, t):
+            dvdt = np.dot(A, v)
+            return dvdt
+
+        v0 = np.array([2, 2, 2])
+        t = np.linspace(0, 10, 100)
+        solution = odeint(model, v0, t)
 
         def dir(x, y, z):
             return np.dot(A, np.array([x, y, z]))
@@ -74,11 +83,38 @@ class phase3d(ThreeDScene):
                     GrowFromCenter(arrow.set_opacity(0.5))
                     for arrow in arrows
                 ),
-                lag_ratio=0.005,
+                lag_ratio=0.0005,
             )
         )
-
-        self.move_camera(phi = 15 * DEGREES, theta = -45 * DEGREES, run_time=3)
         self.wait()
-        self.move_camera(phi = 75 * DEGREES, theta = 0 * DEGREES, run_time=2)
+
+        tracker = ValueTracker(0)
+        soldot = always_redraw(
+            lambda: Dot3D(
+                point = grid.c2p(*solution[int(tracker.get_value())]),
+                color = YELLOW
+            )
+        )
+        path = TracedPath(soldot.get_center, stroke_color=GREEN)
+
+        phi, theta, focal_distance, gamma, distance_to_origin = self.camera.get_value_trackers()
+        # self.play(phi.animate.set_value(50 * DEGREES), run_time=2)
+        # self.play(theta.animate.set_value(50 * DEGREES), run_time=2)
+        # self.play(gamma.animate.set_value(1), run_time=2)
+        # self.play(distance_to_origin.animate.set_value(2), run_time=2)
+        # self.play(focal_distance.animate.set_value(25), run_time=2)
+        # self.wait(1)
+
+        self.add(soldot, path)
+        self.play(
+            tracker.animate.set_value(len(solution) - 1),
+            phi.animate.set_value(15 * DEGREES),
+            theta.animate.set_value(45 * DEGREES),
+            run_time=5, 
+            rate_func = linear
+        )
+
+        # self.move_camera(phi = 15 * DEGREES, theta = -45 * DEGREES, run_time=3)
+        # self.wait()
+        # self.move_camera(phi = 75 * DEGREES, theta = 0 * DEGREES, run_time=2)
         self.wait()
