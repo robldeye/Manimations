@@ -90,7 +90,7 @@ class phase3d(ThreeDScene):
 
         tracker = ValueTracker(0)
         soldot = always_redraw(
-            lambda: Dot3D(
+            lambda: Dot(
                 point = grid.c2p(*solution[int(tracker.get_value())]),
                 color = YELLOW
             )
@@ -108,7 +108,7 @@ class phase3d(ThreeDScene):
         self.add(soldot, path)
         self.play(
             tracker.animate.set_value(len(solution) - 1),
-            phi.animate.set_value(15 * DEGREES),
+            phi.animate.set_value(0 * DEGREES),
             theta.animate.set_value(45 * DEGREES),
             run_time=5, 
             rate_func = linear
