@@ -6,15 +6,22 @@ from scipy.interpolate import interp1d
 class SpringMassSystem(Scene):
     def construct(self):
         # Grid
+        grid_scale = 0.85
         grid = Axes(
-            x_range=(0, 10, 1),
-            y_range=(-5, 5, 1),
+            x_range=[0, 10, 1],
+            y_range=[-5, 5, 1],
             x_length=8,
             y_length=8,
             tips=False,
-            axis_config={"include_numbers": True}
-        ).to_edge(RIGHT).scale(0.85)
+            x_axis_config={"include_numbers": True}
+        ).to_edge(RIGHT).scale(grid_scale)
         grid.get_axis_labels(x_label="t", y_label="y")
+
+        # to flip the y-axis cosmetically since down is the positive direction
+        for y in range(-5, 6):
+            label = MathTex(str(-y)).scale(grid_scale)
+            label.next_to(grid.c2p(0,y), LEFT, buff=0.2)
+            grid.add(label)
         
         # ODE stuff
         
@@ -88,7 +95,7 @@ class SpringMassSystem(Scene):
             r"y''+y=0"
         ).next_to(title, DOWN).align_to(title, LEFT)
         Ex_l2 = MathTex(
-            r"y(0)=2, \, y'(0)=2"
+            rf"y(0)={f"{-y_0}"}, \, y'(0)={f"{-z_0}"}"
         ).next_to(Ex_l1, DOWN).align_to(title, LEFT)
         Exp1 = VGroup(Ex_l1, Ex_l2)
 
@@ -121,7 +128,7 @@ class SpringMassSystem(Scene):
         dot_l = always_redraw(
             lambda: MathTex(
                 r"y(t)"
-            ).next_to(soldot.get_center(), UP)
+            ).next_to(soldot.get_center(), UR)
         )
 
         path = TracedPath(soldot.get_center, stroke_color=GREEN)
