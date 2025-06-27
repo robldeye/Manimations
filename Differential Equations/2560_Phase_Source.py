@@ -8,11 +8,10 @@ class phase_source(Scene):
     def construct(self):
         # Grid
         locations = []
-        lbound = -4
-        ubound = 4
+        bound = 4
         grid = Axes(
-            x_range=(lbound, ubound, 1),
-            y_range=(lbound, ubound, 1),
+            x_range=(-bound, bound, 1),
+            y_range=(-bound, bound, 1),
             x_length=9,
             y_length=9,
             tips=True,
@@ -20,8 +19,8 @@ class phase_source(Scene):
         ).to_edge(RIGHT).scale(0.95)
         grid.get_axis_labels(x_label="x_1", y_label="x_2")
 
-        for x in np.arange(lbound, ubound+1):
-            for y in np.arange(lbound, ubound+1):
+        for x in np.arange(-bound, bound+1):
+            for y in np.arange(-bound, bound+1):
                 locations.append([x, y])
 
         titlep1  = MathTex(r"\text{System with positive}").to_corner(UL)
@@ -43,10 +42,11 @@ class phase_source(Scene):
 
         Eigenspaces = VGroup()
         for vector in eigenvectors:
-            vector_maxscaled = vector / vector[np.argmax(np.abs(vector))] # make largest entry 1
-            vector_line = Line(
-                start = grid.c2p(*(-5*vector_maxscaled)),
-                end = grid.c2p(*(5*vector_maxscaled)),
+            scale_factor = np.max(np.abs(vector))
+            vector_maxscaled = vector / scale_factor # make largest entry 1
+            vector_line = DashedLine(
+                start = grid.c2p(*(-(bound+0.5)*vector_maxscaled)),
+                end = grid.c2p(*((bound+0.5)*vector_maxscaled)),
                 color = ORANGE,
             ).set_opacity(0.5)
             Eigenspaces.add(vector_line)
