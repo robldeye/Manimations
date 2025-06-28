@@ -1,5 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/sm2/480p15/partial_movie_files/sm2/732751292_4205520711_1947844835.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/sm2/480p15/partial_movie_files/sm2/1467568404_290030622_2615010232.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/sm2/480p15/partial_movie_files/sm2/3328624295_3450908342_2914078913.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/sm2/480p15/partial_movie_files/sm2/4139083316_3494816192_1301138712.mp4'
