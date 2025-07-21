@@ -1,17 +1,21 @@
 from manim import *
 import numpy as np
 
-class Trace(Scene):
+class RationalTrace(Scene):
     def construct(self):
         # Set up axes for the complex plane
         axes = Axes(
-            x_range=[-2, 2, 0.5],
-            y_range=[-2, 2, 0.5],
+            x_range=[-2, 2, 1],
+            y_range=[-2, 2, 1],
+            x_length=8,
+            y_length=8,
             axis_config={"include_tip": True, "numbers_to_exclude": []},
         )
         
         # Add labels for axes
         labels = axes.get_axis_labels(x_label="R", y_label="iR")
+        x_label = labels[0]
+        x_label.next_to(axes.c2p(2, 0), direction=DR, buff=0.1)
 
         # Functions
         def z(theta):
@@ -65,8 +69,8 @@ class Trace(Scene):
 
         # Create a moving label for theta
         label = always_redraw(
-            lambda: MathTex(r"z(\theta)")
-            .next_to(dot, RIGHT)
+            lambda: MathTex(rf"z({theta_tracker.get_value()*(1/np.pi):.2f}\pi)")
+            .next_to(dot, UP)
         )
         title = MathTex("z(\\theta) =", "e^{i \\theta}", "+", "e^{i \\theta \\frac{2}{3}}").to_edge(UR)
 
@@ -85,9 +89,9 @@ class Trace(Scene):
 
         # Animate the ValueTracker to move the dot along the curve
         self.play(
-            theta_tracker.animate.set_value(6*np.pi),
-            run_time=9,
-            rate_func=linear
+            theta_tracker.animate.set_value(20*np.pi),
+            run_time=30,
+            rate_func=smooth
         )
         #self.add(parametric_curve)
 
