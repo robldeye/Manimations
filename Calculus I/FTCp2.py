@@ -79,7 +79,7 @@ class FTCp2(Scene):
             lambda: MathTex(r"\text{Slope} =" f"{f(x_value.get_value()):.2f}", color=BLUE).next_to(dot2, UL, buff=-0.15).scale(0.8)
         )
         graph_label = MathTex(r"f(t)", color=BLUE).next_to(axes, DOWN)
-        graph2_label = MathTex(r"F(x) = \int_0^x f(t) \, dt", color=GREEN).next_to(axes2, DOWN, buff=-0.1)
+        graph2_label = MathTex(r"F(x) = \int_0^x f(t) \, dt", color=GREEN).next_to(axes2, DOWN)
 
         # Add elements to the scene
         #self.play(Write(integral_text))

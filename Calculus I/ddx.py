@@ -40,7 +40,7 @@ class ddx(MovingCameraScene):
         end_label = MathTex(r"b").next_to(axes.c2p(3, 0), DOWN)
         fend_label = MathTex(r"s(b)").next_to(axes.c2p(0, f(3)), LEFT)
         graph_label = MathTex(r"s(t)", color=BLUE).next_to(axes.c2p(4, 3))
-        lim_label = MathTex(r"\text{Slide} \,\, b \to a").next_to(axes.c2p(3,2), DR).scale(0.75)
+        lim_label = MathTex(r"\text{Slide} \,\, b \to a").next_to(axes.c2p(3,1)).scale(0.75)
         slope_def = MathTex(r"\text{Slope}", r"= \frac{s(b) - s(a)}{b-a}").next_to(end_label, DOWN, buff=-0.15).scale(0.6)
         slope_def[0].set_color(RED)
 
@@ -82,38 +82,6 @@ class ddx(MovingCameraScene):
 
         scale_factor = 30
 
-        secant_line = axes.get_secant_slope_group(
-                graph=fgraph,
-                x=1,
-                dx=2,
-                dx_line_color=WHITE,
-                dy_line_color=WHITE,
-                dx_label="b-a",
-                dy_label="s(b) - s(a)",
-                secant_line_color=RED,
-                secant_line_length=30,
-        )
-
-        moving_secant = always_redraw(
-            lambda: Line(
-                start=axes.c2p(x_value.get_value(), f(x_value.get_value())) - 
-                (axes.c2p(x_value.get_value() + dx_value.get_value(), f(x_value.get_value() + dx_value.get_value())) - 
-                axes.c2p(x_value.get_value(), f(x_value.get_value()))) / np.linalg.norm(
-                axes.c2p(x_value.get_value() + dx_value.get_value(), f(x_value.get_value() + dx_value.get_value())) - 
-                axes.c2p(x_value.get_value(), f(x_value.get_value()))
-                ) * (scale_factor - 1) / 2,
-    
-                end=axes.c2p(x_value.get_value() + dx_value.get_value(), f(x_value.get_value() + dx_value.get_value())) + 
-                (axes.c2p(x_value.get_value() + dx_value.get_value(), f(x_value.get_value() + dx_value.get_value())) - 
-                axes.c2p(x_value.get_value(), f(x_value.get_value()))) / np.linalg.norm(
-                axes.c2p(x_value.get_value() + dx_value.get_value(), f(x_value.get_value() + dx_value.get_value())) - 
-                axes.c2p(x_value.get_value(), f(x_value.get_value()))
-                ) * (scale_factor - 1) / 2,
-    
-                color=RED
-            )
-        )
-
         dot2 = always_redraw(
             lambda: Dot(color=YELLOW).move_to(
                 axes.c2p(x_value.get_value() + dx_value.get_value(), f(x_value.get_value() + dx_value.get_value()))
@@ -127,6 +95,20 @@ class ddx(MovingCameraScene):
             rate_func=smooth
         )
         self.wait()
+
+        secant_line = always_redraw(
+            lambda: axes.get_secant_slope_group(
+                graph=fgraph,
+                x=1,
+                dx=dx_value.get_value(),
+                dx_line_color=WHITE,
+                dy_line_color=WHITE,
+                dx_label="b-a",
+                dy_label="s(b) - s(a)",
+                secant_line_color=RED,
+                secant_line_length=30,
+            )
+        )
 
         end_line = DashedLine(
                 start = end_label.get_center()+0.2*UP, end = axes.c2p(1+dx_value.get_value(), f(1+dx_value.get_value())), color=WHITE, stroke_width=2, buff=0.1
@@ -161,12 +143,6 @@ class ddx(MovingCameraScene):
 
         self.play(
             Write(slope_def)
-        )
-        self.wait()
-
-        self.play(
-            FadeOut(secant_line),
-            FadeIn(moving_secant)
         )
         self.wait()
 
