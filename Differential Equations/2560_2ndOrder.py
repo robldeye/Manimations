@@ -1,3 +1,5 @@
+# manim-renderer: opengl
+
 from manim import *
 import numpy as np
 from scipy.integrate import odeint

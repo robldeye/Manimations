@@ -89,8 +89,8 @@ class RationalTrace(Scene):
 
         # Animate the ValueTracker to move the dot along the curve
         self.play(
-            theta_tracker.animate.set_value(20*np.pi),
-            run_time=30,
+            theta_tracker.animate.set_value(6*np.pi),
+            run_time=10,
             rate_func=smooth
         )
         #self.add(parametric_curve)

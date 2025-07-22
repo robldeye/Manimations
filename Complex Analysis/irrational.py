@@ -77,7 +77,7 @@ class IrrationalTrace(Scene):
         # Define the parametric curve to trace z(theta)
         parametric_curve = axes.plot_parametric_curve(
             lambda t: [z(t).real, z(t).imag],
-            t_range=[0, 1000],
+            t_range=[0, 20*np.pi],
             color=BLUE
         )
 
