@@ -10,7 +10,7 @@ class autonomous(Scene):
         # Grid
         locations = []
         grid_scale = 0.95
-        y_radius = 4
+        y_radius = 3
         t_radius = y_radius
         grid = Axes(
             x_range=(0, t_radius, 1),
@@ -18,7 +18,8 @@ class autonomous(Scene):
             x_length=9,
             y_length=9,
             tips=True,
-            axis_config={"include_numbers": False}
+            x_axis_config={"include_numbers": False},
+            y_axis_config={"include_numbers": True},
         ).to_edge(RIGHT).scale(grid_scale)
         grid.get_axis_labels(x_label="t", y_label="y")
 
@@ -35,8 +36,8 @@ class autonomous(Scene):
         np.random.seed(42)
         # num_zeroes = 3
         # zeroes = np.random.uniform(-y_radius, y_radius, num_zeroes)
-        zeroes = [-2, 0, 3] # please select integers to make constant solution finding below work
-        rate = Rational(1, 50)
+        zeroes = [-2, 1] # please select integers to make constant solution finding below work
+        rate = Rational(1, 5) # Smaller coefficients help with stability
         def model(y, t):
             return float(rate)*math.prod((y - zero) for zero in zeroes)
 
@@ -62,7 +63,15 @@ class autonomous(Scene):
         # solving ODE for multiple solution paths
         tracker = ValueTracker(0)
         num_solutions = 8
-        initial_values = np.random.uniform(-y_radius, y_radius, num_solutions)
+        epsilon = 0.2
+        initial_values = []
+        while len(initial_values) < num_solutions:
+            candidate_value = np.random.uniform(-y_radius, y_radius)
+            if all(abs(candidate_value - z) > epsilon for z in zeroes):
+                initial_values.append(candidate_value)
+        # This helps with stability with ODEint
+        
+        np.random.uniform(-y_radius, y_radius, num_solutions)
         t = np.linspace(0, t_radius + 1, 1000) # smoothness of curve later on tied to framerate in manim.cfg, not step size
 
         def make_solution_dot(interpolated_solution, solution_color):
@@ -88,7 +97,7 @@ class autonomous(Scene):
 
         for i, vec in enumerate(initial_values):
             solution_color = colors[i]
-            solution = odeint(model, vec, t)
+            solution = odeint(model, vec, t, mxstep=5000)
             interpolated_solution = interp1d(t, solution, axis=0, kind='linear')
             interpolated_solutions.append(interpolated_solution)
 
@@ -348,7 +357,7 @@ class autonomous(Scene):
             FadeOut(*solution_labels)
         )
         self.play(
-            model_label.animate.to_corner(DL),
+            # model_label.animate.to_corner(DL),
             FadeOut(titlep1, titlep2),
         )
         self.play(
