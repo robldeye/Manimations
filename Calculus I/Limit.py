@@ -45,9 +45,9 @@ class Limit(Scene):
             lambda: MathTex(f"{func(1+right_tracker.get_value()):.2f}", color=BLUE).next_to(right_dot, DOWN)
         )
 
-        limit_def = MathTex(r"\lim_{t \to 1} s(t) = -3").next_to(limit_point, DR)
-        func_label = MathTex(r"s(t)=t^2-4", color=BLUE).to_edge(DR)
-        title = MarkupText("Prototypical Example").to_edge(UP).scale(0.8)
+        func_label = MathTex(r"s(t)=t^2-4", color=BLUE).to_edge(UL)
+        title = MarkupText("A typical Limit example").scale(0.8)
+        limit_def = MathTex(r"\lim_{t \to 1} s(t) = -3").next_to(title, DOWN)
 
         # Lines
         left_line = always_redraw(
@@ -70,10 +70,12 @@ class Limit(Scene):
             end = axes.c2p(1, -3)
         )
 
-        # Start
-        self.add(axes, graph, x_label, y_label, func_label, limit_dot, leftx_dot, rightx_dot)
-        self.play(Write(title))
-        # Animations
+        self.play(Write(title), run_time=1)
+        self.play(title.animate.to_edge(UP))
+        self.play(FadeIn(axes, x_label, y_label))
+        self.play(FadeIn(graph, func_label))
+        self.play(FadeIn(limit_dot, leftx_dot, rightx_dot))
+        self.wait()
         self.play(
             FadeIn(leftx_label, rightx_label),
             FadeIn(left_line, right_line),
@@ -82,6 +84,7 @@ class Limit(Scene):
         )
         self.wait(2)
 
+        self.play(FocusOn(left_dot))
         self.play(
             left_tracker.animate.set_value(0),
             run_time=2
@@ -89,6 +92,7 @@ class Limit(Scene):
         self.play(FadeOut(leftx_label, left_line))
         self.wait()
 
+        self.play(FocusOn(right_dot))
         self.play(
             right_tracker.animate.set_value(0),
             run_time=2
@@ -107,5 +111,6 @@ class Limit(Scene):
             Circumscribe(limit_dot, color=YELLOW),
             Write(neg3dash)
         )
-        self.play(FadeIn(limit_def))
+        self.play(Write(limit_def), run_time=1)
+        self.play(Indicate(limit_dot))
         self.wait(3)

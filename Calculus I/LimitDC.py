@@ -7,21 +7,30 @@ class LimitDC(Scene):
             x_range=[-1, 3, 1],
             y_range=[-5, 5, 1],
         ).add_coordinates()
-        x_label = axes.get_x_axis_label("x").shift(DOWN)
-        y_label = axes.get_y_axis_label("t").shift(LEFT)
+        x_label = axes.get_x_axis_label("t").shift(DOWN)
+        y_label = axes.get_y_axis_label("s").shift(LEFT)
 
         # Functions
         funcl = lambda x: x**2-4
         funcr = lambda x: x**2+1
+        refdot = Dot() # Need for radius
         graphl = axes.plot(funcl, color=BLUE, x_range=[-1, 1])
-        graphr = axes.plot(funcr, color=BLUE, x_range=[1, 3])
+        graphr = ParametricFunction(
+            lambda x: axes.c2p(x, funcr(x)),
+            t_range=[1, 3],
+            dt=0.02,
+            use_smoothing=True,
+            color=BLUE
+        )
+        # axes.plot(funcr, color=BLUE, x_range=[1.08, 3], dt=0.02)
 
         # Dots
-        limit_pointl = axes.input_to_graph_point(1, graphl)
-        limit_dotl = Dot(axes.input_to_graph_point(1, graphl), color=BLUE)
+        refdot = Dot()
+        limit_pointl = axes.c2p(1, funcl(1))
+        limit_dotl = Dot(axes.c2p(1, funcl(1)), color=BLUE, stroke_width=5)
 
-        limit_pointr = axes.input_to_graph_point(1, graphr)
-        limit_dotr = Dot(axes.input_to_graph_point(1, graphr), color=BLUE, fill_opacity=0)
+        limit_pointr = axes.c2p(1, funcr(1))
+        limit_dotr = Circle(radius=refdot.radius, color=BLUE, fill_opacity=0).move_to(axes.c2p(1, funcr(1)))
 
         left_dot = Dot().move_to(axes.c2p(0.5, funcl(0.5)))
         right_dot = Dot().move_to(axes.c2p(1.5, funcr(1.5)))
@@ -52,9 +61,7 @@ class LimitDC(Scene):
 
         limitl_label = MathTex(r"\lim_{t \to 1^-} s(t) = -3").next_to(limit_pointl, RIGHT).scale(0.75)
         limitr_label = MathTex(r"\lim_{t \to 1^+} s(t) = 2").next_to(limit_pointr, RIGHT).scale(0.75)
-        func_label = MathTex(r"s(t)=\begin{cases}t^2-4 & t \leq 1\\t^2 +1 & t>1\end{cases}", color=BLUE).to_edge(DR).scale(0.75)
-        title = MarkupText("Jump Discontinuity").to_edge(UP).scale(0.8)
-        title2 = MathTex(r"\lim_{t \to 1} s(t) = \, \text{DNE}").to_edge(UP).scale(0.8)
+        title = MarkupText("Sided-Limits").scale(0.8)
 
         # Lines
         left_line = always_redraw(
@@ -74,13 +81,13 @@ class LimitDC(Scene):
 
         discontline = DashedLine(axes.c2p(1,-3), axes.c2p(1,2), buff=0.1)
 
-        # Groups
-        backgrp = VGroup(axes, graphl, graphr, x_label, y_label, func_label, limit_dotl, limit_dotr, leftx_dot, rightx_dot)
-
-        # Start
-        self.play(Create(backgrp))
-        self.play(Write(title))
-        # Animations
+        self.play(Write(title), run_time=1)
+        self.play(title.animate.to_edge(UP))
+        func_label = MathTex(r"s(t)=\begin{cases}t^2-4 & t \leq 1\\t^2 +1 & t>1\end{cases}", color=BLUE).to_corner(DR)
+        self.play(FadeIn(axes, x_label, y_label))
+        self.play(FadeIn(graphl, graphr, func_label))
+        self.play(FadeIn(limit_dotl, limit_dotr, leftx_dot, rightx_dot))
+        self.wait()
         self.play(
             FadeIn(leftx_label, rightx_label),
             FadeIn(left_line, right_line),
@@ -89,6 +96,7 @@ class LimitDC(Scene):
         )
         self.wait(2)
 
+        self.play(FocusOn(left_dot))
         self.play(
             left_tracker.animate.set_value(0),
             run_time=2
@@ -96,6 +104,7 @@ class LimitDC(Scene):
         self.play(FadeOut(left_line, leftx_label))
         self.wait()
 
+        self.play(FocusOn(right_dot))
         self.play(
             right_tracker.animate.set_value(0),
             run_time=2
@@ -108,5 +117,7 @@ class LimitDC(Scene):
 
         # Final
         self.play(FadeIn(limitl_label, limitr_label))
-        self.play(Transform(title, title2))
+        DNE_label = MathTex(r"\lim_{t \to 1} s(t) \text{ DNE}").next_to(title, DOWN)
+        self.play(Write(DNE_label), run_time=1)
+        self.play(Indicate(left_dot), Indicate(right_dot))
         self.wait(3)
