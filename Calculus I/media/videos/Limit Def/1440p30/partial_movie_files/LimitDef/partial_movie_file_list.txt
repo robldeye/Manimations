@@ -1,0 +1,9 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/robld/Desktop/Manimations-1/Calculus I/media/videos/Limit Def/1440p30/partial_movie_files/LimitDef/871471688_2676440988_223132457.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations-1/Calculus I/media/videos/Limit Def/1440p30/partial_movie_files/LimitDef/3344075484_4187040824_2381005485.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations-1/Calculus I/media/videos/Limit Def/1440p30/partial_movie_files/LimitDef/3344075484_3959877445_4208939718.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations-1/Calculus I/media/videos/Limit Def/1440p30/partial_movie_files/LimitDef/3344075484_2268332985_488022988.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations-1/Calculus I/media/videos/Limit Def/1440p30/partial_movie_files/LimitDef/3344075484_1202252223_1845073289.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations-1/Calculus I/media/videos/Limit Def/1440p30/partial_movie_files/LimitDef/3344075484_3649372508_2331606836.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations-1/Calculus I/media/videos/Limit Def/1440p30/partial_movie_files/LimitDef/3344075484_1551952443_2773465540.mp4'
+file 'file:C:/Users/robld/Desktop/Manimations-1/Calculus I/media/videos/Limit Def/1440p30/partial_movie_files/LimitDef/3344075484_634017564_3908616671.mp4'
