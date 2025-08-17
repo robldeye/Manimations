@@ -1,5 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/InvertibleTransform/480p15/partial_movie_files/InvertibleTransform/1185818338_1993366894_2316902090.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/InvertibleTransform/480p15/partial_movie_files/InvertibleTransform/624642324_3483313871_2008555962.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/InvertibleTransform/480p15/partial_movie_files/InvertibleTransform/624642324_1850058250_4229777166.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/InvertibleTransform/480p15/partial_movie_files/InvertibleTransform/624642324_4071659840_2672928040.mp4'

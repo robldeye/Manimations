@@ -1,9 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Determinant/480p15/partial_movie_files/Determinant/1185818338_123554531_43666119.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Determinant/480p15/partial_movie_files/Determinant/624642324_3714617901_3894157851.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Determinant/480p15/partial_movie_files/Determinant/624642324_123554531_3241456847.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Determinant/480p15/partial_movie_files/Determinant/624642324_3439681202_1226001954.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Determinant/480p15/partial_movie_files/Determinant/624642324_123554531_174348217.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Determinant/480p15/partial_movie_files/Determinant/624642324_711505330_2248471592.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Determinant/480p15/partial_movie_files/Determinant/624642324_2101908339_2302377279.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/Determinant/480p15/partial_movie_files/Determinant/624642324_4071659840_648333201.mp4'

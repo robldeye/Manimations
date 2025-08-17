@@ -1,6 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/sonik/Manimations/media/videos/rational/480p15/partial_movie_files/Trace/1185818338_2560000190_223132457.mp4'
-file 'file:C:/Users/sonik/Manimations/media/videos/rational/480p15/partial_movie_files/Trace/624642324_2620506561_1148410792.mp4'
-file 'file:C:/Users/sonik/Manimations/media/videos/rational/480p15/partial_movie_files/Trace/624642324_1432596116_2918036987.mp4'
-file 'file:C:/Users/sonik/Manimations/media/videos/rational/480p15/partial_movie_files/Trace/624642324_122641131_1016959236.mp4'
-file 'file:C:/Users/sonik/Manimations/media/videos/rational/480p15/partial_movie_files/Trace/624642324_682321507_1602296780.mp4'

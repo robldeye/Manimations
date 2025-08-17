@@ -1,7 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/nullspace/1080p60/partial_movie_files/nullspace/3686252790_3467822883_164759791.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/nullspace/1080p60/partial_movie_files/nullspace/2389549107_3467822883_1980846808.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/nullspace/1080p60/partial_movie_files/nullspace/2612576902_3063518179_2954175870.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/nullspace/1080p60/partial_movie_files/nullspace/324618913_2304249630_2942682483.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/nullspace/1080p60/partial_movie_files/nullspace/794245819_3842921304_3607769443.mp4'
-file 'file:C:/Users/robld/Desktop/Manimations/media/videos/nullspace/1080p60/partial_movie_files/nullspace/4155702754_66111383_217897338.mp4'

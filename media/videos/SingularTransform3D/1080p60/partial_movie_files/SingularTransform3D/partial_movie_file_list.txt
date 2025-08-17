@@ -1,5 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/SingularTransform3D/1080p60/partial_movie_files/SingularTransform3D/4013831283_548731573_3889598590.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/SingularTransform3D/1080p60/partial_movie_files/SingularTransform3D/1522642883_4250511055_812732305.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/SingularTransform3D/1080p60/partial_movie_files/SingularTransform3D/4194110553_4141849542_3732745747.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/SingularTransform3D/1080p60/partial_movie_files/SingularTransform3D/1888924652_789064381_906030468.mp4'

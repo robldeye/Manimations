@@ -1,6 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/Eigenspace/1080p60/partial_movie_files/Eigenspace/1756784466_4073845205_3234313232.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/Eigenspace/1080p60/partial_movie_files/Eigenspace/2439123371_4073845205_275922268.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/Eigenspace/1080p60/partial_movie_files/Eigenspace/542461192_1446833899_3832015400.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/Eigenspace/1080p60/partial_movie_files/Eigenspace/4211942452_4141849542_3835496601.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/Eigenspace/1080p60/partial_movie_files/Eigenspace/1829976441_2230675760_3697652363.mp4'

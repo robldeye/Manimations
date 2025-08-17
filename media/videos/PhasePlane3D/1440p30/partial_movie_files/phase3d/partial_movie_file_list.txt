@@ -1,5 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/PhasePlane3D/1440p30/partial_movie_files/phase3d/1177841277_2673827936_3053191018.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/PhasePlane3D/1440p30/partial_movie_files/phase3d/2572528999_4073845205_2667604572.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/PhasePlane3D/1440p30/partial_movie_files/phase3d/2268091914_261748451_1442906037.mp4'
-file 'file:C:/Users/sonik/Desktop/VSCode/Manimations/media/videos/PhasePlane3D/1440p30/partial_movie_files/phase3d/2135435798_2068277886_1766353903.mp4'

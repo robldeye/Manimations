@@ -1,6 +1,0 @@
-# This file is used internally by FFMPEG.
-file 'file:C:/Users/sonik/Manimations/media/videos/Span/480p15/partial_movie_files/SpanOfVector/1185818338_3868921939_544414470.mp4'
-file 'file:C:/Users/sonik/Manimations/media/videos/Span/480p15/partial_movie_files/SpanOfVector/624642324_3575343020_2172637739.mp4'
-file 'file:C:/Users/sonik/Manimations/media/videos/Span/480p15/partial_movie_files/SpanOfVector/624642324_634017564_2724782929.mp4'
-file 'file:C:/Users/sonik/Manimations/media/videos/Span/480p15/partial_movie_files/SpanOfVector/624642324_450557918_1943463964.mp4'
-file 'file:C:/Users/sonik/Manimations/media/videos/Span/480p15/partial_movie_files/SpanOfVector/624642324_4071659840_3387208184.mp4'
