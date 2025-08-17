@@ -1,0 +1,12 @@
+# This file is used internally by FFMPEG.
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/871471688_242882700_223132457.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_3426124195_4045756222.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_3005464529_1215727116.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_2268332985_142067240.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_842992134_2748109852.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_804723701_503628427.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_2268332985_2614094345.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_257010671_2927083021.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_2268332985_4076419143.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_4211405240_2478224686.mp4'
+file 'file:C:/Users/robld/Desktop/Manim/Manimations/Calculus I/media/videos/FTCp2/1440p30/partial_movie_files/FTCp2/3344075484_634017564_3447082866.mp4'
