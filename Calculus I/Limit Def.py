@@ -58,7 +58,7 @@ class LimitDef(Scene):
 
         delta_label = MathTex(rf"\delta = {float(sqrt(epsilon.get_value())):.2f}").next_to(epsilon_label, DOWN).align_to(title, LEFT)
         delta_label.add_updater(lambda l: l.become(MathTex(rf"\delta = {float(sqrt(epsilon.get_value())):.2f}").next_to(epsilon_label, DOWN).align_to(title, LEFT)))
-        delta_r = always_redraw(lambda: MathTex(rf"a + \delta").next_to(axes.c2p(float(sqrt(L+epsilon.get_value())), 0), 2*DOWN))
+        delta_r = always_redraw(lambda: MathTex(rf"a + \delta").next_to(axes.c2p(float(sqrt(L+epsilon.get_value())), 0), 3*DOWN))
         delta_l = always_redraw(lambda: MathTex(rf"a - \delta").next_to(axes.c2p(float(sqrt(L-epsilon.get_value())), 0), 2*DOWN))
         a_label = MathTex(rf"a").next_to(axes.c2p(a, 0), DOWN)
 
@@ -66,7 +66,7 @@ class LimitDef(Scene):
         f_dot = Dot(axes.c2p(a+offset*epsilon.get_value(), f_num(a+offset*epsilon.get_value())))
         f_dot.add_updater(lambda d: d.become(Dot(axes.c2p(a+offset*epsilon.get_value(), f_num(a+offset*epsilon.get_value())))))
         f_line = DashedLine(f_dot.get_center(), axes.c2p(a+offset*epsilon.get_value()))
-        f_line.add_updater()
+        f_line.add_updater(lambda l: l.become(DashedLine(f_dot.get_center(), axes.c2p(a+offset*epsilon.get_value()))))
 
         self.play(Write(title), run_time=1)
         self.play(title.animate.to_corner(UL))
@@ -81,26 +81,20 @@ class LimitDef(Scene):
 
         limitdef_1 = MathTex(r"\text{Q) How do we formalize } f(x) \to L \text{ as } x \to a\text{ ?}").scale(0.6).next_to(title, DOWN).align_to(title, LEFT)
 
-        limitdef_2a = MathTex(r"\text{A) Whenever } |f(x) - L| \text{ becomes small,}").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
-        limitdef_2b = MathTex(r"\quad \text{We need } |x - a| \text{ to also become small.}").scale(0.6).next_to(limitdef_2a, DOWN).align_to(title, LEFT)
+        limitdef_2a = MathTex(r"\text{A) Whenever } |x - a| \text{ becomes small,}").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
+        limitdef_2b = MathTex(r"\quad \text{We want } |f(x) - L| \text{ to become small as well.}").scale(0.6).next_to(limitdef_2a, DOWN).align_to(title, LEFT)
+        limitdef_2g = VGroup(limitdef_2a, limitdef_2b)
 
-        limitdef_3a = MathTex(r"\text{A) For any } \epsilon \text{ so that } |f(x) - L| < \epsilon,").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
-        limitdef_3b = MathTex(r"\quad \text{There is a } \delta \text{ so that } |x - a | < \delta.").scale(0.6).next_to(limitdef_3a, DOWN).align_to(title, LEFT)
+        limitdef_3a = MathTex(r"\text{A) For any } \epsilon > 0, \text{ we can find a } \delta > 0}").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
+        limitdef_3b = MathTex(r"\quad \text{so that whenever } |x - a| < \delta,").scale(0.6).next_to(limitdef_3a, DOWN).align_to(title, LEFT)
+        limitdef_3c = MathTex(r"\quad \text{we have } |f(x) - L| < \epsilon.").scale(0.6).next_to(limitdef_3b, DOWN).align_to(title, LEFT)
+        limitdef_3g = VGroup(limitdef_3a, limitdef_3b, limitdef_3c)
 
         self.play(Write(limitdef_1), run_time=3)
         self.wait(2)
 
-        self.play(FadeIn(y_poly))
-        self.play(Write(limitdef_2a), run_time = 2)
-        self.play(FadeIn(L_label))
-        self.wait(1)
-        self.play(epsilon.animate.set_value(0.1), run_time=2)
-        self.wait(0.5)
-        self.play(epsilon.animate.set_value(1), run_time=0.25)
-        self.wait()
-
         self.play(FadeIn(x_poly))
-        self.play(Write(limitdef_2b), run_time = 2)
+        self.play(Write(limitdef_2a), run_time = 2)
         self.play(FadeIn(a_label))
         self.wait(1)
         self.play(epsilon.animate.set_value(0.1), run_time=2)
@@ -108,19 +102,26 @@ class LimitDef(Scene):
         self.play(epsilon.animate.set_value(1), run_time=0.25)
         self.wait()
 
-        self.play(Indicate(limitdef_2a))
-        self.play(Transform(limitdef_2a, limitdef_3a))
-        self.play(Indicate(limitdef_2b))
-        self.play(Transform(limitdef_2b, limitdef_3b))
+        self.play(FadeIn(y_poly))
+        self.play(Write(limitdef_2b), run_time = 2)
+        self.play(FadeIn(L_label))
+        self.wait(1)
+        self.play(epsilon.animate.set_value(0.1), run_time=2)
+        self.wait(0.5)
+        self.play(epsilon.animate.set_value(1), run_time=0.25)
+        self.wait()
+
+        self.play(Indicate(limitdef_2g))
+        self.play(Transform(limitdef_2g, limitdef_3g))
         self.wait(2)
 
         self.play(Write(epsilon_label), Write(epsilon_u), Write(epsilon_d))        
         self.play(Write(delta_label), Write(delta_r), Write(delta_l))
         self.wait(1)
 
-        self.play(epsilon.animate.set_value(0.1), run_time=2)
+        self.play(epsilon.animate.set_value(0.1), run_time=5)
         self.wait(0.5)
-        self.play(epsilon.animate.set_value(1), run_time=0.25)
+        self.play(epsilon.animate.set_value(1), run_time=1)
         
 
         self.wait(3)
