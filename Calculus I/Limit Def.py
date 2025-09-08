@@ -49,6 +49,7 @@ class LimitDef(Scene):
         epsilon_u = always_redraw(lambda: MathTex(rf"L + \epsilon").next_to(axes.c2p(0, L+epsilon.get_value()), LEFT))
         epsilon_d = always_redraw(lambda: MathTex(rf"L - \epsilon").next_to(axes.c2p(0, L-epsilon.get_value()), LEFT))
         L_label = MathTex(rf"L").next_to(axes.c2p(0, L), LEFT)
+        L_line = DashedLine(axes.c2p(0, L), axes.c2p(axes.x_range[1], L), color=YELLOW)
 
         x_poly = always_redraw(
             lambda: axes.get_area(
@@ -112,7 +113,7 @@ class LimitDef(Scene):
 
         self.play(FadeIn(y_poly))
         self.play(Write(limitdef_2b), run_time = 2)
-        self.play(FadeIn(L_label))
+        self.play(FadeIn(L_label, L_line))
         self.wait()
         self.play(epsilon.animate.set_value(0.25), run_time=2)
         self.wait()
@@ -141,14 +142,22 @@ class LimitDef(Scene):
         )
         self.wait()
 
-        self.play(epsilon.animate.set_value(0.25), run_time=2)
-        self.wait(0.5)
-        self.play(delta.animate.set_value(0.25), run_time=2)
-        self.wait(0.5)
         self.play(
-            epsilon.animate.set_value(1),
-            delta.animate.set_value(1)
+            AnimationGroup(
+                *(t.animate.set_value(0.25) for t in [delta, epsilon]),
+                lag_ratio=0.1,
+                run_time=2
+            )
         )
+        self.wait()
+        self.play(
+            AnimationGroup(
+                *(t.animate.set_value(1) for t in [delta, epsilon]),
+                lag_ratio=0.25,
+                run_time=2
+            )
+        )
+
         self.wait(3)
         
         # New Scene
@@ -163,12 +172,8 @@ class LimitDef(Scene):
 
         interval1 = Interval(1, 2) # [1, 2]
         f2_expr1 = 1 + 2/x
-        f2_expr1_inv = 2/(x-1)
-        f2_expr1_inv_num = lambdify(x, f2_expr1_inv, 'numpy')
         interval2 = Interval(2, 4, left_open=True) #(2, 4]
         f2_expr2 = 1 - Rational(0.5)*(x-2)**2
-        f2_expr2_inv = 2 + sqrt(2*(1-x))
-        f2_expr2_inv_num = lambdify(x, f2_expr2_inv, 'numpy')
         f2_expr = Piecewise(
             (f2_expr1, interval1.contains(x)), # Second condition needs to be a boolean
             (f2_expr2, interval2.contains(x))
@@ -187,6 +192,7 @@ class LimitDef(Scene):
         
         bad_L = 1.5
         bad_epsilon = ValueTracker(0.4)
+        bad_x = ValueTracker(4)
         
         self.play(Create(curve2))
         self.wait(0.5)
@@ -207,6 +213,13 @@ class LimitDef(Scene):
 
         bad_epsilon_label = MathTex(rf"\epsilon = {bad_epsilon.get_value():.2f}").to_edge(LEFT).align_to(title2, LEFT)
         bad_epsilon_label.add_updater(lambda l: l.become(MathTex(rf"\epsilon = {bad_epsilon.get_value():.2f}").to_edge(LEFT).align_to(title2, LEFT)))
+
+        x2_dot = Dot(axes.c2p(bad_x.get_value(), 0), color=GREEN)
+        x2_dot.add_updater(lambda d: d.become(Dot(axes.c2p(bad_x.get_value(), 0), color=GREEN)))
+        y2_dot = Dot(axes.c2p(bad_x.get_value(), f2_num(bad_x.get_value())), color=PURPLE)
+        y2_dot.add_updater(lambda d: d.become(Dot(axes.c2p(bad_x.get_value(), f2_num(bad_x.get_value())), color=PURPLE)))
+        y2_line = DashedLine(axes.c2p(0, f2_num(bad_x.get_value())), y2_dot.get_center(), color=PURPLE)
+        y2_line.add_updater(lambda l: l.become(DashedLine(axes.c2p(0, f2_num(bad_x.get_value())), y2_dot.get_center(), color=PURPLE)))
 
         self.play(
             Create(bad_L_line),
@@ -230,5 +243,15 @@ class LimitDef(Scene):
                 lag_ratio=1
             )
         )
+        self.wait(0.5)
+        self.play(FadeIn(x2_dot, y2_dot, y2_line))
+        self.wait(0.5)
+        self.play(bad_x.animate.set_value(2+1e-9), run_time=2)
+        self.wait(0.1)
+        bad_x.set_value(2)
+        self.wait(0.1)
+        self.play(bad_x.animate.set_value(1), run_time=1)
+        self.wait(0.5)
+        self.play(FadeOut(x2_dot, y2_dot, y2_line))
         self.wait(3)
 

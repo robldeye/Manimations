@@ -73,8 +73,7 @@ class IVT(Scene):
         self.wait(0.5)
 
         self.play(tracker.animate.set_value(4), run_time=2)
-        self.wait(0.5)
-
+        tracker.set_value(4)
         c_dot = Dot(axes.c2p(tracker.get_value(), 0), color=GREEN)
         c_dot.add_updater(lambda d: d.become(Dot(axes.c2p(tracker.get_value(), 0), color=GREEN)))
         c_line = DashedLine(y_dot.get_center(), c_dot.get_center(), color=GREEN)
@@ -90,6 +89,7 @@ class IVT(Scene):
                 ).arrange(RIGHT).next_to(axes.c2p(tracker.get_value(), 0), DOWN)
             )
         )
+        self.wait(0.5)
 
         self.play(FadeIn(c_labelg, c_line, c_dot))
         self.wait(0.5)
@@ -184,17 +184,17 @@ class IVT(Scene):
         self.play(Create(bad_line), Write(bad_line_label))
         self.wait(0.5)
 
-        self.play(tracker.animate.set_value(3), run_time=2, rate_func=linear)
+        self.play(tracker.animate.set_value(3), run_time=2)
         tracker.set_value(3+1e-9)
-        self.play(tracker.animate.set_value(4), run_time=1, rate_func=linear)
+        self.play(tracker.animate.set_value(4), run_time=1)
 
         self.play(Write(IVT6), run_time=1)
         self.wait(0.5)
         self.play(Indicate(IVT6))
 
-        self.play(tracker.animate.set_value(3+1e-9), run_time=1, rate_func=linear)
+        self.play(tracker.animate.set_value(3+1e-9), run_time=1)
         tracker.set_value(3)
-        self.play(tracker.animate.set_value(4/3), run_time=1, rate_func=linear)
+        self.play(tracker.animate.set_value(4/3), run_time=1)
 
         self.wait(3)
 
