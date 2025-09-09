@@ -95,16 +95,16 @@ class LimitDef(Scene):
 
         limitdef_1 = MathTex(r"\text{Q) How do we formalize }", r"f(x) \to L", r"\text{ as }",  r"x \to a", r"\text{ ?}").scale(0.6).next_to(title, DOWN).align_to(title, LEFT)
 
-        limitdef_2a = MathTex(r"\text{A) As the distance } |x - a| \text{ becomes small,}").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
+        limitdef_2a = MathTex(r"\text{A) As the distance } 0 < |x - a| \text{ becomes small,}").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
         limitdef_2b = MathTex(r"\text{the distance } |f(x) - L| \text{ should also get small.}").scale(0.6).next_to(limitdef_2a, DOWN).align_to(title, LEFT)
         limitdef_2g = VGroup(limitdef_2a, limitdef_2b)
 
-        limitdef_2a_int = MathTex(r"\text{A) As the distance } |x - a| < \delta,").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
-        limitdef_2b_int = MathTex(r"\text{we have the distance } |f(x) - L| < \epsilon").scale(0.6).next_to(limitdef_2a, DOWN).align_to(title, LEFT)
+        limitdef_2a_int = MathTex(r"\text{A) As the distance }", r"0 < |x - a| < \delta", r",").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
+        limitdef_2b_int = MathTex(r"\text{we have the distance }", r"|f(x) - L| < \epsilon").scale(0.6).next_to(limitdef_2a, DOWN).align_to(title, LEFT)
         limitdef_2g_int = VGroup(limitdef_2a_int, limitdef_2b_int)
 
         limitdef_3a = MathTex(r"\text{A) For any }",  r"\epsilon > 0", r"\text{ we can find a }", r"\delta > 0}").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
-        limitdef_3b = MathTex(r"\quad \text{so that whenever }", r"|x - a| < \delta", r",").scale(0.6).next_to(limitdef_3a, DOWN).align_to(title, LEFT)
+        limitdef_3b = MathTex(r"\quad \text{so that whenever }", r"0 < |x - a| < \delta", r",").scale(0.6).next_to(limitdef_3a, DOWN).align_to(title, LEFT)
         limitdef_3b[1].set_color(GREEN)
         limitdef_3c = MathTex(r"\quad \text{we have }", r"|f(x) - L| < \epsilon", r".").scale(0.6).next_to(limitdef_3b, DOWN).align_to(title, LEFT)
         limitdef_3c[1].set_color(YELLOW)
@@ -153,25 +153,23 @@ class LimitDef(Scene):
             )
         )
         self.wait(4)
-        self.play(ReplacementTransform(limitdef_2g_int, limitdef_3g))
-        self.wait(6)
 
         self.play(Write(epsilon_label), Write(epsilon_u), Write(epsilon_d), Create(epsilon_u_line), Create(epsilon_d_line))
         self.play(
             AnimationGroup(
-                *(Indicate(m) for m in [limitdef_3a[1], epsilon_u, epsilon_d])
+                *(Indicate(m) for m in [limitdef_2b_int[1], epsilon_u, epsilon_d])
             )
         )
         self.wait(0.5)      
         self.play(Write(delta_label), Write(delta_r), Write(delta_l))
         self.play(
             AnimationGroup(
-                *(Indicate(m) for m in [limitdef_3a[3], delta_l, delta_r])
+                *(Indicate(m) for m in [limitdef_2a_int[1], delta_l, delta_r])
             )
         )
         self.wait(0.5)
 
-        for i in [1/2, 3/8, 1/4, 1/5, 1/10, 1/100]:
+        for i in [1/2, 3/8, 1/4]:
             self.play(epsilon_target.animate.set_value(i), run_time=2)
             self.wait(0.5)
             self.play(
@@ -182,6 +180,22 @@ class LimitDef(Scene):
                 )
             )
         self.wait()
+
+        self.play(ReplacementTransform(limitdef_2g_int, limitdef_3g))
+        self.wait(6)
+
+        for i in [1/5, 1/10, 1/100]:
+            self.play(epsilon_target.animate.set_value(i), run_time=2)
+            self.wait(0.5)
+            self.play(
+                AnimationGroup(
+                    *(t.animate.set_value(i) for t in [delta, epsilon]),
+                    lag_ratio=0.75,
+                    run_time=1
+                )
+            )
+        self.wait()
+
         self.play(FadeOut(epsilon_u, epsilon_d, delta_l, delta_r))
         self.wait(0.5)
 
@@ -258,7 +272,7 @@ class LimitDef(Scene):
         self.play(bad_epsilon_target.animate.set_value(0.25), run_time=2)
 
         bad_delta_label1 = MathTex(r"\text{For } \epsilon = 0.25, \text{ there is no}").next_to(bad_epsilon_label, 2*DOWN).align_to(title2, LEFT)
-        bad_delta_label2 = MathTex(r"\delta > 0 \text{ so that } |x - 2| < \delta").next_to(bad_delta_label1, DOWN).align_to(title2, LEFT)
+        bad_delta_label2 = MathTex(r"\delta > 0 \text{ so that } 0 < |x - 2| < \delta").next_to(bad_delta_label1, DOWN).align_to(title2, LEFT)
         bad_delta_label3 = MathTex(r"\text{will force } |g(x) - 1.5| < 0.25").next_to(bad_delta_label2, DOWN).align_to(title2, LEFT)
         bad_delta_labelg = VGroup(bad_delta_label1, bad_delta_label2, bad_delta_label3)
         bad_delta_labelf = MathTex(r"\lim_{x \to 2} g(x) \neq 1.5").next_to(bad_epsilon_label, 2*DOWN).align_to(title2, LEFT)
