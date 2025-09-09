@@ -29,6 +29,7 @@ class LimitDef(Scene):
 
         curve = axes.plot(lambda x: f_num(x), x_range=[0, 2], color=BLUE)
         epsilon = ValueTracker(0.5*(L))
+        epsilon_target = ValueTracker((3/8)*(L))
         delta = ValueTracker(g_y.subs(y, epsilon.get_value()))
         # tracker = ValueTracker(float(sqrt(2.5)))
 
@@ -44,10 +45,14 @@ class LimitDef(Scene):
             return poly
         y_poly = always_redraw(lambda: y_polygon(epsilon.get_value()))
 
-        epsilon_label = MathTex(rf"\epsilon = {epsilon.get_value():.2f}").to_edge(LEFT).align_to(title, LEFT)
-        epsilon_label.add_updater(lambda l: l.become(MathTex(rf"\epsilon = {epsilon.get_value():.2f}").to_edge(LEFT).align_to(title, LEFT)))
-        epsilon_u = always_redraw(lambda: MathTex(rf"L + \epsilon").next_to(axes.c2p(0, L+epsilon.get_value()), LEFT))
-        epsilon_d = always_redraw(lambda: MathTex(rf"L - \epsilon").next_to(axes.c2p(0, L-epsilon.get_value()), LEFT))
+        epsilon_label = MathTex(rf"\epsilon = {epsilon_target.get_value():.2f}").to_edge(LEFT).align_to(title, LEFT)
+        epsilon_label.add_updater(lambda l: l.become(MathTex(rf"\epsilon = {epsilon_target.get_value():.2f}").to_edge(LEFT).align_to(title, LEFT)))
+        epsilon_u = always_redraw(lambda: MathTex(rf"L + \epsilon").next_to(axes.c2p(0, L+epsilon_target.get_value()), LEFT))
+        epsilon_u_line = DashedLine(axes.c2p(0, L+epsilon_target.get_value()), axes.c2p(axes.x_range[1], L+epsilon_target.get_value()))
+        epsilon_u_line.add_updater(lambda l: l.become(DashedLine(axes.c2p(0, L+epsilon_target.get_value()), axes.c2p(axes.x_range[1], L+epsilon_target.get_value()))))
+        epsilon_d = always_redraw(lambda: MathTex(rf"L - \epsilon").next_to(axes.c2p(0, L-epsilon_target.get_value()), LEFT))
+        epsilon_d_line = DashedLine(axes.c2p(0, L-epsilon_target.get_value()), axes.c2p(axes.x_range[1], L-epsilon_target.get_value()))
+        epsilon_d_line.add_updater(lambda l: l.become(DashedLine(axes.c2p(0, L-epsilon_target.get_value()), axes.c2p(axes.x_range[1], L-epsilon_target.get_value()))))
         L_label = MathTex(rf"L").next_to(axes.c2p(0, L), LEFT)
         L_line = DashedLine(axes.c2p(0, L), axes.c2p(axes.x_range[1], L), color=YELLOW)
 
@@ -88,11 +93,15 @@ class LimitDef(Scene):
 
         # self.play(FadeIn(f_data))
 
-        limitdef_1 = MathTex(r"\text{Q) How do we formalize } f(x) \to L \text{ as } x \to a\text{ ?}").scale(0.6).next_to(title, DOWN).align_to(title, LEFT)
+        limitdef_1 = MathTex(r"\text{Q) How do we formalize }", r"f(x) \to L", r"\text{ as }",  r"x \to a", r"\text{ ?}").scale(0.6).next_to(title, DOWN).align_to(title, LEFT)
 
-        limitdef_2a = MathTex(r"\text{A) Whenever } |x - a| \text{ becomes small,}").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
-        limitdef_2b = MathTex(r"\quad \text{We want } |f(x) - L| \text{ to become small as well.}").scale(0.6).next_to(limitdef_2a, DOWN).align_to(title, LEFT)
+        limitdef_2a = MathTex(r"\text{A) As the distance } |x - a| \text{ becomes small,}").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
+        limitdef_2b = MathTex(r"\text{the distance } |f(x) - L| \text{ should also get small.}").scale(0.6).next_to(limitdef_2a, DOWN).align_to(title, LEFT)
         limitdef_2g = VGroup(limitdef_2a, limitdef_2b)
+
+        limitdef_2a_int = MathTex(r"\text{A) As the distance } |x - a| < \delta,").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
+        limitdef_2b_int = MathTex(r"\text{we have the distance } |f(x) - L| < \epsilon").scale(0.6).next_to(limitdef_2a, DOWN).align_to(title, LEFT)
+        limitdef_2g_int = VGroup(limitdef_2a_int, limitdef_2b_int)
 
         limitdef_3a = MathTex(r"\text{A) For any }",  r"\epsilon > 0", r"\text{ we can find a }", r"\delta > 0}").scale(0.6).next_to(limitdef_1, 2*DOWN).align_to(title, LEFT)
         limitdef_3b = MathTex(r"\quad \text{so that whenever }", r"|x - a| < \delta", r",").scale(0.6).next_to(limitdef_3a, DOWN).align_to(title, LEFT)
@@ -101,33 +110,53 @@ class LimitDef(Scene):
         limitdef_3c[1].set_color(YELLOW)
         limitdef_3g = VGroup(limitdef_3a, limitdef_3b, limitdef_3c)
 
-        self.play(Write(limitdef_1), run_time=3)
+        good_limit = MathTex(r"\lim_{x \to a} f(x) = L").next_to(delta_label, 2*DOWN).align_to(title, LEFT)
+
+        self.play(Write(limitdef_1), run_time=2)
         self.wait(2)
 
         self.play(FadeIn(x_poly))
+        self.wait(0.5)
+        self.play(Indicate(limitdef_1[3]))
+        self.wait(0.5)
         self.play(Write(limitdef_2a), run_time = 2)
+        self.wait(1)
         self.play(FadeIn(a_label))
-        self.wait()
+        self.wait(0.5)
         self.play(delta.animate.set_value(0.25), run_time=2)
-        self.wait()
+        self.wait(0.5)
 
         self.play(FadeIn(y_poly))
+        self.wait(0.5)
+        self.play(Indicate(limitdef_1[1]))
+        self.wait(0.5)
         self.play(Write(limitdef_2b), run_time = 2)
+        self.wait(1)
         self.play(FadeIn(L_label, L_line))
-        self.wait()
+        self.wait(0.5)
         self.play(epsilon.animate.set_value(0.25), run_time=2)
-        self.wait()
+        self.wait(0.5)
 
         self.play(
             delta.animate.set_value(1),
             epsilon.animate.set_value(1)
         )
+        self.wait(0.5)
 
         self.play(Indicate(limitdef_2g))
-        self.play(Transform(limitdef_2g, limitdef_3g))
-        self.wait(2)
+        self.wait(0.5)
+        self.play(
+            AnimationGroup(
+                ReplacementTransform(limitdef_2g[0], limitdef_2g_int[0]),
+                ReplacementTransform(limitdef_2g[1], limitdef_2g_int[1]),
+                lag_ratio=1
+            )
+        )
+        self.wait(4)
+        self.play(ReplacementTransform(limitdef_2g_int, limitdef_3g))
+        self.wait(6)
 
-        self.play(Write(epsilon_label), Write(epsilon_u), Write(epsilon_d))
+        self.play(Write(epsilon_label), Write(epsilon_u), Write(epsilon_d), Create(epsilon_u_line), Create(epsilon_d_line))
         self.play(
             AnimationGroup(
                 *(Indicate(m) for m in [limitdef_3a[1], epsilon_u, epsilon_d])
@@ -140,24 +169,23 @@ class LimitDef(Scene):
                 *(Indicate(m) for m in [limitdef_3a[3], delta_l, delta_r])
             )
         )
-        self.wait()
+        self.wait(0.5)
 
-        self.play(
-            AnimationGroup(
-                *(t.animate.set_value(0.25) for t in [delta, epsilon]),
-                lag_ratio=0.1,
-                run_time=2
+        for i in [1/2, 3/8, 1/4, 1/5, 1/10, 1/100]:
+            self.play(epsilon_target.animate.set_value(i), run_time=2)
+            self.wait(0.5)
+            self.play(
+                AnimationGroup(
+                    *(t.animate.set_value(i) for t in [delta, epsilon]),
+                    lag_ratio=0.75,
+                    run_time=1
+                )
             )
-        )
         self.wait()
-        self.play(
-            AnimationGroup(
-                *(t.animate.set_value(1) for t in [delta, epsilon]),
-                lag_ratio=0.25,
-                run_time=2
-            )
-        )
+        self.play(FadeOut(epsilon_u, epsilon_d, delta_l, delta_r))
+        self.wait(0.5)
 
+        self.play(Write(good_limit))
         self.wait(3)
         
         # New Scene
@@ -165,6 +193,7 @@ class LimitDef(Scene):
 
         title2 = MathTex(r"\underline{\text{Limit Failure}}")
         self.play(Write(title2))
+        self.wait(0.5)
         self.play(title2.animate.to_corner(UL))
         self.wait(0.5)
 
@@ -191,28 +220,24 @@ class LimitDef(Scene):
             \end{cases}""", color=BLUE).scale(0.75).next_to(title2, DOWN).align_to(title2, LEFT)
         
         bad_L = 1.5
-        bad_epsilon = ValueTracker(0.4)
+        bad_epsilon_target = ValueTracker(0.4)
         bad_x = ValueTracker(4)
         
         self.play(Create(curve2))
         self.wait(0.5)
         self.play(Write(f2_label))
-
-        bad_y_poly = always_redraw(
-            lambda: Polygon(
-                axes.c2p(0, bad_L-bad_epsilon.get_value()), 
-                axes.c2p(0, bad_L+bad_epsilon.get_value()), 
-                axes.c2p(4, bad_L+bad_epsilon.get_value()), 
-                axes.c2p(4, bad_L-bad_epsilon.get_value()),
-                color=YELLOW, fill_opacity=0.55, stroke_width=0
-            )
-        )
+        self.wait(0.5)
 
         bad_L_label = MathTex(rf"L = 1.5", color=RED).next_to(axes.c2p(0, 1.5), LEFT)
         bad_L_line = DashedLine(axes.c2p(0, 1.5), axes.c2p(4, 1.5), color=RED)
 
-        bad_epsilon_label = MathTex(rf"\epsilon = {bad_epsilon.get_value():.2f}").to_edge(LEFT).align_to(title2, LEFT)
-        bad_epsilon_label.add_updater(lambda l: l.become(MathTex(rf"\epsilon = {bad_epsilon.get_value():.2f}").to_edge(LEFT).align_to(title2, LEFT)))
+        bad_epsilon_label = MathTex(rf"\epsilon = {bad_epsilon_target.get_value():.2f}").to_edge(LEFT).align_to(title2, LEFT)
+        bad_epsilon_label.add_updater(lambda l: l.become(MathTex(rf"\epsilon = {bad_epsilon_target.get_value():.2f}").to_edge(LEFT).align_to(title2, LEFT)))
+        bad_epsilon_u_line = DashedLine(axes.c2p(0, bad_L+bad_epsilon_target.get_value()), axes.c2p(axes.x_range[1], bad_L+bad_epsilon_target.get_value()))
+        bad_epsilon_u_line.add_updater(lambda l: l.become(DashedLine(axes.c2p(0, bad_L+bad_epsilon_target.get_value()), axes.c2p(axes.x_range[1], bad_L+bad_epsilon_target.get_value()))))
+        bad_epsilon_d_line = DashedLine(axes.c2p(0, bad_L-bad_epsilon_target.get_value()), axes.c2p(axes.x_range[1], bad_L-bad_epsilon_target.get_value()))
+        bad_epsilon_d_line.add_updater(lambda l: l.become(DashedLine(axes.c2p(0, bad_L-bad_epsilon_target.get_value()), axes.c2p(axes.x_range[1], bad_L-bad_epsilon_target.get_value()))))
+
 
         x2_dot = Dot(axes.c2p(bad_x.get_value(), 0), color=GREEN)
         x2_dot.add_updater(lambda d: d.become(Dot(axes.c2p(bad_x.get_value(), 0), color=GREEN)))
@@ -228,14 +253,15 @@ class LimitDef(Scene):
         )
         self.wait(0.5)
 
-        self.play(FadeIn(bad_y_poly))
+        self.play(FadeIn(bad_epsilon_u_line, bad_epsilon_d_line))
         self.wait(0.5)
-        self.play(bad_epsilon.animate.set_value(0.25), run_time=2)
+        self.play(bad_epsilon_target.animate.set_value(0.25), run_time=2)
 
-        bad_delta_label1 = MathTex(rf"\text{{For }} \epsilon = 0.25, \text{{ there is no}}").next_to(bad_epsilon_label, DOWN).align_to(title2, LEFT)
-        bad_delta_label2 = MathTex(rf"\delta > 0 \text{{ so that }} |x - 2| < \delta").next_to(bad_delta_label1, DOWN).align_to(title2, LEFT)
-        bad_delta_label3 = MathTex(rf"\text{{will force }} |g(x) - 1.5| < 0.25").next_to(bad_delta_label2, DOWN).align_to(title2, LEFT)
+        bad_delta_label1 = MathTex(r"\text{For } \epsilon = 0.25, \text{ there is no}").next_to(bad_epsilon_label, 2*DOWN).align_to(title2, LEFT)
+        bad_delta_label2 = MathTex(r"\delta > 0 \text{ so that } |x - 2| < \delta").next_to(bad_delta_label1, DOWN).align_to(title2, LEFT)
+        bad_delta_label3 = MathTex(r"\text{will force } |g(x) - 1.5| < 0.25").next_to(bad_delta_label2, DOWN).align_to(title2, LEFT)
         bad_delta_labelg = VGroup(bad_delta_label1, bad_delta_label2, bad_delta_label3)
+        bad_delta_labelf = MathTex(r"\lim_{x \to 2} g(x) \neq 1.5").next_to(bad_epsilon_label, 2*DOWN).align_to(title2, LEFT)
 
         self.play(
             AnimationGroup(
@@ -247,11 +273,13 @@ class LimitDef(Scene):
         self.play(FadeIn(x2_dot, y2_dot, y2_line))
         self.wait(0.5)
         self.play(bad_x.animate.set_value(2+1e-9), run_time=2)
-        self.wait(0.1)
         bad_x.set_value(2)
-        self.wait(0.1)
         self.play(bad_x.animate.set_value(1), run_time=1)
         self.wait(0.5)
+        self.play(bad_x.animate.set_value(2), run_time=1)
+        bad_x.set_value(2+1e-9)
+        self.play(bad_x.animate.set_value(4), run_time=2)
         self.play(FadeOut(x2_dot, y2_dot, y2_line))
+        self.play(ReplacementTransform(bad_delta_labelg, bad_delta_labelf))
         self.wait(3)
 
